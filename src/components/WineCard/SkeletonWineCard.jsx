@@ -1,10 +1,10 @@
-import React from "react"
-import ContentLoader from "react-content-loader"
+import React from 'react';
+import ContentLoader from 'react-content-loader';
 
 const SkeletonWineCard = () => (
   <ContentLoader
     speed={2}
-    width={310}
+    width={295}
     height={407}
     viewBox="0 0 310 407"
     backgroundColor="#f3f3f3"
@@ -21,7 +21,6 @@ const SkeletonWineCard = () => (
     <rect x="126" y="170" rx="18" ry="18" width="21" height="9" />
     <rect x="42" y="188" rx="10" ry="10" width="195" height="24" />
   </ContentLoader>
-)
+);
 
-export default SkeletonWineCard
-
+export default SkeletonWineCard;

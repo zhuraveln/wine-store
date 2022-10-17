@@ -5,7 +5,7 @@ const WineList = ({ wine }) => {
 
   return (
     <>
-      {wine.map((item) =>
+      {wine.map(item =>
         <WineCard {...item} key={item._id} />
       )}
     </>

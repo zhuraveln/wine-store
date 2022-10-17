@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { addItem } from '../../redux/slices/cartSlice';
 
 import styles from './WineCard.module.scss';
 
-const WineCard = ({ imageUrl, title, bottleType, bottleSize, price }) => {
+const WineCard = ({ _id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
+  const dispatch = useDispatch()
+
+  const cartItem = useSelector(state => state.cart.items.find(item => item._id === _id))
+
   const [selectType, setSelectType] = useState(0);
   const [selectSize, setSelectSize] = useState(0);
+
+  const onClickAdd = () => {
+    const item = {
+      _id,
+      imageUrl,
+      title,
+      bottleType: bottleTypes[selectType],
+      bottleSize: bottleSizes[selectSize],
+      price
+    }
+
+    dispatch(addItem(item))
+  }
 
   return (
     <div className={styles.root}>
@@ -12,7 +32,7 @@ const WineCard = ({ imageUrl, title, bottleType, bottleSize, price }) => {
       <h4 className={styles.title}>{title}</h4>
       <div className={styles.selector}>
         <ul>
-          {bottleType.map((type, index) => (
+          {bottleTypes.map((type, index) => (
             <li
               className={selectType === index ? `${styles.active}` : ''}
               onClick={() => setSelectType(index)}
@@ -23,7 +43,7 @@ const WineCard = ({ imageUrl, title, bottleType, bottleSize, price }) => {
           ))}
         </ul>
         <ul>
-          {bottleSize.map((type, index) => (
+          {bottleSizes.map((type, index) => (
             <li
               className={selectSize === index ? `${styles.active}` : ''}
               onClick={() => setSelectSize(index)}
@@ -36,7 +56,10 @@ const WineCard = ({ imageUrl, title, bottleType, bottleSize, price }) => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.price}>{price} ₽</div>
-        <button className="button button--outline button--add">
+        <button
+          onClick={onClickAdd}
+          className="button button--outline button--add"
+        >
           <svg
             width="12"
             height="12"
@@ -50,7 +73,7 @@ const WineCard = ({ imageUrl, title, bottleType, bottleSize, price }) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>1</i>
+          {cartItem && <i>{cartItem.count}</i>}
         </button>
       </div>
     </div>

@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './Sort.module.scss';
 
 const Sort = ({ sort, changeSort }) => {
   const { sortTypes } = useSelector((state) => state.filterSearch);
+  const sortRef = useRef()
 
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const path = event.composedPath()
+      if (!path.includes(sortRef.current)) {
+        setOpen(false)
+      }
+    }
+
+    document.body.addEventListener('click', handleClickOutside)
+
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
+
+
   return (
-    <div className={styles.root}>
+    <div ref={sortRef} className={styles.root}>
       <div className={styles.label}>
         <svg
           width="10"
