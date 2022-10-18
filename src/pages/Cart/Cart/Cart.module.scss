@@ -1,0 +1,142 @@
+@import '/src/scss/variables.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  align-self: center;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+
+  svg {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+}
+
+.clear {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #b6b6b6;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: all $duration ease-in-out;
+    opacity: 0.3;
+  }
+
+  p {
+    margin-left: 5px;
+    font-size: 18px;
+    transition: all $duration ease-in-out;
+  }
+
+  &:hover {
+    p,
+    svg {
+      color: darken($color: #b6b6b6, $amount: 50);
+      opacity: 1;
+    }
+  }
+}
+
+.bottom {
+  margin: 50px 0;
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 22px;
+
+      &:last-of-type {
+        b {
+          color: $orange;
+        }
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    .buttonBack {
+      display: flex;
+      align-items: center;
+      width: 200px;
+      min-width: 100px;
+      border-radius: 30px;
+      padding: 15px 20px;
+      border: 1px solid darken($color: $gray-line, $amount: 10);
+      cursor: pointer;
+      transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+
+      svg {
+        height: 16px;
+        width: 14px;
+        margin-right: 5px;
+
+        path {
+          fill: darken($color: $gray-line, $amount: 10);
+        }
+      }
+
+      span {
+        color: darken($color: $gray-line, $amount: 20);
+        font-weight: 600;
+      }
+
+      &:hover {
+        background-color: darken($color: $gray-line, $amount: 90);
+        border-color: darken($color: $gray-line, $amount: 90);
+
+        span {
+          color: $gray-line;
+        }
+
+        svg {
+          path {
+            fill: #fff;
+          }
+        }
+      }
+    }
+
+    .buttonPay {
+      display: flex;
+      justify-content: center;
+      width: 200px;
+      min-width: 100px;
+      border-radius: 30px;
+      padding: 15px 20px;
+      background-color: $orange;
+      cursor: pointer;
+      transition: background-color $duration ease-in-out;
+
+      span {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      &:hover {
+        background-color: darken($orange, 8%);
+      }
+    }
+  }
+}

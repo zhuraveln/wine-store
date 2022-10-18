@@ -3,15 +3,17 @@ import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setSort, setFilters } from '../redux/slices/filterSearchSlice';
+import { setCategory, setSort, setFilters } from '../../redux/slices/filterSearchSlice';
 
-import WineService from '../API/WineService';
-import Categories from '../components/Categories/Categories';
-import Sort from '../components/Sort/Sort';
-import SkeletonWineCard from '../components/WineCard/SkeletonWineCard';
-import WineList from '../components/WineList';
+import WineService from '../../API/WineService';
+import Categories from '../../components/Categories/Categories';
+import Sort from '../../components/Sort/Sort';
+import SkeletonWineCard from '../../components/WineCard/SkeletonWineCard';
+import WineList from '../../components/WineList';
 
-const Home = () => {
+import styles from './Shop.module.scss';
+
+const Shop = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isUrlSearch = useRef(false);
@@ -90,14 +92,14 @@ const Home = () => {
 
   return (
     <>
-      <div className="content__top">
+      <div className={styles.top}>
         <Categories category={selectCategory} changeCategory={changeCategory} />
         <Sort sort={selectSort} changeSort={changeSort} />
       </div>
-      <h2 className="content__title">{selectCategory === 'Все' ? 'Все вина' : selectCategory}</h2>
-      <div className="content__items">{isLoading ? skeletons : <WineList wine={wine} />}</div>
+      <h2 className={styles.title}>{selectCategory === 'Все' ? 'Все вина' : selectCategory}</h2>
+      <div className={styles.items}>{isLoading ? skeletons : <WineList wine={wine} />}</div>
     </>
   );
 };
 
-export default Home;
+export default Shop;

@@ -43,13 +43,13 @@ const WineCard = ({ _id, imageUrl, title, bottleTypes, bottleSizes, price }) => 
           ))}
         </ul>
         <ul>
-          {bottleSizes.map((type, index) => (
+          {bottleSizes.map((size, index) => (
             <li
               className={selectSize === index ? `${styles.active}` : ''}
               onClick={() => setSelectSize(index)}
               key={index}
             >
-              {type}
+              {size} л.
             </li>
           ))}
         </ul>
@@ -58,7 +58,8 @@ const WineCard = ({ _id, imageUrl, title, bottleTypes, bottleSizes, price }) => 
         <div className={styles.price}>{price} ₽</div>
         <button
           onClick={onClickAdd}
-          className="button button--outline button--add"
+          // className="button button--outline button--add"
+          className={styles.buttonAdd}
         >
           <svg
             width="12"

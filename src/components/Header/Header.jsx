@@ -16,7 +16,7 @@ const Header = () => {
     <div className={styles.root}>
       <Link to="/">
         <div className={styles.logo}>
-          <img width="38" src="img/logo.png" alt="Wine logo" />
+          <img src="img/logo.png" alt="Wine logo" />
           <div>
             <h1>Wine store</h1>
             <p>Лучшее вино на побережье</p>
@@ -24,9 +24,10 @@ const Header = () => {
         </div>
       </Link>
       <SearchBar />
-      <Link to="/cart" className="button button--cart">
+      {/* <Link to="/cart" className="button button--cart"> */}
+      <Link to="/cart" className={styles.buttonCart}>
         <span>{totalPrice} ₽</span>
-        <div className="button__delimiter"></div>
+        <div className={styles.delimiter}></div>
         <svg
           width="18"
           height="18"

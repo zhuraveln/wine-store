@@ -1,0 +1,15 @@
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 35px 0;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

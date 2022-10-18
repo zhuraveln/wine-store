@@ -1,3 +1,5 @@
+@import '../../scss/variables.scss';
+
 .root {
   width: 90%;
   display: flex;
@@ -11,6 +13,8 @@
 
     img {
       margin-right: 15px;
+      width: 33px;
+      height: 45px;
     }
 
     h1 {
@@ -24,5 +28,37 @@
     p {
       color: #7b7b7b;
     }
+  }
+
+  .buttonCart {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    background-color: $orange;
+    padding: 12px 25px;
+    transition: background-color $duration ease-in-out;
+
+    svg {
+      margin-right: 8px;
+      margin-bottom: 1px;
+    }
+
+    span {
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: darken($orange, 8%);
+    }
+  }
+
+  .delimiter {
+    width: 1px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.25);
+    margin-left: 14px;
+    margin-right: 14px;
   }
 }
