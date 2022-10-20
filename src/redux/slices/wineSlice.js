@@ -10,37 +10,62 @@ export const fetchAllWine = createAsyncThunk(
   }
 )
 
+export const fetchOneWine = createAsyncThunk(
+  'wine/fetchOneWineStatus',
+  async (params) => {
+    const { id } = params
+    const data = await WineAPI.getOneWine(id)
+    return data
+  }
+)
+
 const initialState = {
   wine: [],
-  wineStatus: 'loading' // loading | success | error
+  wineStatus: 'loading', // loading | success | error
+
+  selectWine: {},
+  selectWineStatus: 'loading' // loading | success | error
 }
 
 export const wineSlice = createSlice({
   name: 'wine',
   initialState,
   reducers: {
-    setWine(state, action) {
-      state.wine = action.payload
-    }
+    // setWine(state, action) {
+    //   state.wine = action.payload
+    // }
   },
   extraReducers: {
     [fetchAllWine.pending]: (state) => {
-      state.wineStatus = 'loading'
       state.wine = []
+      state.wineStatus = 'loading'
     },
     [fetchAllWine.fulfilled]: (state, action) => {
       state.wine = action.payload
       state.wineStatus = 'success'
     },
     [fetchAllWine.rejected]: (state) => {
-      state.wineStatus = 'error'
       state.wine = []
+      state.wineStatus = 'error'
+    },
+
+    [fetchOneWine.pending]: (state) => {
+      state.selectWine = {}
+      state.selectWineStatus = 'loading'
+    },
+    [fetchOneWine.fulfilled]: (state, action) => {
+      state.selectWine = action.payload
+      state.selectWineStatus = 'success'
+    },
+    [fetchOneWine.rejected]: (state) => {
+      state.selectWine = {}
+      state.selectWineStatus = 'error'
     }
   }
 })
 
 export const wineSelector = state => state.wine
 
-export const { setWine } = wineSlice.actions
+// export const { setWine } = wineSlice.actions
 
 export default wineSlice.reducer

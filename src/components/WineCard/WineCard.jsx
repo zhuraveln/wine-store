@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { addItem, cartItemSelector } from '../../redux/slices/cartSlice';
 
@@ -28,8 +29,10 @@ const WineCard = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
 
   return (
     <div className={styles.root}>
-      <img className={styles.image} src={imageUrl} alt="wine" />
-      <h4 className={styles.title}>{title}</h4>
+      <Link to={`/wine/${id}`}>
+        <img className={styles.image} src={imageUrl} alt="wine" />
+        <h4 className={styles.title}>{title}</h4>
+      </Link>
       <div className={styles.selector}>
         <ul>
           {bottleTypes.map((type, index) => (
@@ -58,7 +61,6 @@ const WineCard = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
         <div className={styles.price}>{price} ₽</div>
         <button
           onClick={onClickAdd}
-          // className="button button--outline button--add"
           className={styles.buttonAdd}
         >
           <svg

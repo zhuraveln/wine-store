@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export default class WineAPI {
 
+  // Get All Wine from server
   static async getAllWine(category, sort, searchValue) {
 
     const categoryType = category !== 'Все' ? `category=${category}` : ''
@@ -16,6 +17,15 @@ export default class WineAPI {
       `${process.env.REACT_APP_MOCK_API}?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${searchValue}`
     )
 
+    return response.data
+  }
+
+  // Get One Wine from server
+  static async getOneWine(id) {
+
+    const response = await axios.get(
+      `${process.env.REACT_APP_MOCK_API}/${id}`
+    )
     return response.data
   }
 }

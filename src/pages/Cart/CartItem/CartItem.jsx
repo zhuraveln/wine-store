@@ -4,6 +4,7 @@ import { addItem, removeItem, removeAllItems } from '../../../redux/slices/cartS
 import { useDispatch } from 'react-redux';
 
 import styles from './CartItem.module.scss';
+import { Link } from 'react-router-dom';
 
 const CartItem = ({ id, imageUrl, title, bottleType, bottleSize, price, count }) => {
 
@@ -18,13 +19,16 @@ const CartItem = ({ id, imageUrl, title, bottleType, bottleSize, price, count })
   return (
     <div className={styles.item}>
 
-      <img className={styles.imgWine} src={imageUrl} alt="wine" />
+      <Link to={`/wine/${id}`} className={styles.imgInfo}>
+        <img className={styles.imgWine} src={imageUrl} alt="wine" />
 
-      <div className={styles.info}>
-        <h3>{title}</h3>
-        <p>{bottleType}, {bottleSize} л.</p>
-        <p>{price} ₽</p>
-      </div>
+        <div className={styles.info}>
+          <h3>{title}</h3>
+          <p>{bottleType}, {bottleSize} л.</p>
+          <p>{price} ₽</p>
+        </div>
+      </Link>
+
 
       <div className={styles.count}>
         <div onClick={itemMinus} className={styles.buttonCount}>

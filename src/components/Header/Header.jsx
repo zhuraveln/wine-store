@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cartSelector } from '../../redux/slices/cartSlice';
 
 import SearchBar from '../SearchBar/SearchBar';
@@ -8,6 +8,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import styles from './Header.module.scss'
 
 const Header = () => {
+  const { pathname } = useLocation()
 
   const { items, totalPrice } = useSelector(cartSelector)
 
@@ -24,8 +25,9 @@ const Header = () => {
           </div>
         </div>
       </Link>
-      <SearchBar />
-      {/* <Link to="/cart" className="button button--cart"> */}
+
+      {pathname !== '/cart' && <SearchBar />}
+
       <Link to="/cart" className={styles.buttonCart}>
         <span>{totalPrice} ₽</span>
         <div className={styles.delimiter}></div>

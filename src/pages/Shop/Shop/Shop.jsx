@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -19,6 +19,7 @@ import styles from './Shop.module.scss';
 const Shop = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const isUrlSearch = useRef(false);
   const isMounted = useRef(false);
 
@@ -40,7 +41,7 @@ const Shop = () => {
   };
 
   const fetchWine = (category, sort, searchValue) => {
-    const data = dispatch(fetchAllWine({ category, sort, searchValue }));
+    dispatch(fetchAllWine({ category, sort, searchValue }));
   };
 
   // First mount. If search bar have a URL data - save it in Redux (filterSearchSlice).
