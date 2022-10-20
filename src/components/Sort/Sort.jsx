@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { filterSearchSelector } from '../../redux/slices/filterSearchSlice';
 
 import styles from './Sort.module.scss';
 
 const Sort = ({ sort, changeSort }) => {
-  const { sortTypes } = useSelector((state) => state.filterSearch);
+  const { sortTypes } = useSelector(filterSearchSelector);
   const sortRef = useRef()
 
   const [open, setOpen] = useState(false);

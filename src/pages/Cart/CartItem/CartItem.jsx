@@ -5,15 +5,15 @@ import { useDispatch } from 'react-redux';
 
 import styles from './CartItem.module.scss';
 
-const CartItem = ({ _id, imageUrl, title, bottleType, bottleSize, price, count }) => {
+const CartItem = ({ id, imageUrl, title, bottleType, bottleSize, price, count }) => {
 
   const dispatch = useDispatch();
 
-  const itemPlus = () => dispatch(addItem({ _id }))
+  const itemPlus = () => dispatch(addItem({ id }))
 
-  const itemMinus = () => dispatch(removeItem(_id))
+  const itemMinus = () => dispatch(removeItem(id))
 
-  const removeAll = () => dispatch(removeAllItems({ _id, price, count }))
+  const removeAll = () => dispatch(removeAllItems({ id, price, count }))
 
   return (
     <div className={styles.item}>

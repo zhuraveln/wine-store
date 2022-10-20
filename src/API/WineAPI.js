@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export default class WineService {
+export default class WineAPI {
 
-  static async getWine(category, sort, searchValue) {
+  static async getAllWine(category, sort, searchValue) {
 
     const categoryType = category !== 'Все' ? `category=${category}` : ''
     const sortType = sort.sortProperty.replace('-', '')
@@ -18,7 +18,5 @@ export default class WineService {
 
     return response.data
   }
-
-
 }
 

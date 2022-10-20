@@ -1,3 +1,5 @@
+@import '/src/scss/variables.scss';
+
 .root {
   position: relative;
 
@@ -14,9 +16,15 @@
     }
 
     span {
-      color: #fe5f1e;
-      border-bottom: 1px dashed #fe5f1e;
+      color: $orange;
+      border-bottom: 1px dashed $orange;
       cursor: pointer;
+      transition: all $duration ease-in-out;
+
+      &:hover {
+        color: darken($orange, 8%);
+        border-bottom-color: darken($orange, 8%);
+      }
     }
   }
 

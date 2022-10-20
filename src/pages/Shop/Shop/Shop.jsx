@@ -3,15 +3,18 @@ import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setSort, setFilters } from '../../redux/slices/filterSearchSlice';
 
-import WineService from '../../API/WineService';
-import Categories from '../../components/Categories/Categories';
-import Sort from '../../components/Sort/Sort';
-import SkeletonWineCard from '../../components/WineCard/SkeletonWineCard';
-import WineList from '../../components/WineList';
+import { setCategory, setSort, setFilters, filterSearchSelector } from '../../../redux/slices/filterSearchSlice';
+import { fetchAllWine, wineSelector } from '../../../redux/slices/wineSlice';
+
+import Categories from '../../../components/Categories/Categories';
+import Sort from '../../../components/Sort/Sort';
+import SkeletonWineCard from '../../../components/WineCard/SkeletonWineCard';
+import WineList from '../../../components/WineList';
+import ShopError from '../ShopError/ShopError';
 
 import styles from './Shop.module.scss';
+
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -19,15 +22,14 @@ const Shop = () => {
   const isUrlSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const [wine, setWine] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { wine, wineStatus } = useSelector(wineSelector);
 
   const {
     selectCategory,
     selectSort,
     searchValue,
     sortTypes
-  } = useSelector(state => state.filterSearch);
+  } = useSelector(filterSearchSelector);
 
   const changeCategory = (category) => {
     dispatch(setCategory(category));
@@ -37,11 +39,8 @@ const Shop = () => {
     dispatch(setSort(sortType));
   };
 
-  const fetchWine = async (category, sort, searchValue) => {
-    setIsLoading(true);
-    const wine = await WineService.getWine(category, sort, searchValue);
-    setWine(wine);
-    setIsLoading(false);
+  const fetchWine = (category, sort, searchValue) => {
+    const data = dispatch(fetchAllWine({ category, sort, searchValue }));
   };
 
   // First mount. If search bar have a URL data - save it in Redux (filterSearchSlice).
@@ -88,16 +87,24 @@ const Shop = () => {
     isMounted.current = true;
   }, [selectCategory, selectSort, searchValue]);
 
-  const skeletons = [...new Array(8)].map((_, index) => <SkeletonWineCard key={index} />);
-
   return (
     <>
       <div className={styles.top}>
         <Categories category={selectCategory} changeCategory={changeCategory} />
         <Sort sort={selectSort} changeSort={changeSort} />
       </div>
-      <h2 className={styles.title}>{selectCategory === 'Все' ? 'Все вина' : selectCategory}</h2>
-      <div className={styles.items}>{isLoading ? skeletons : <WineList wine={wine} />}</div>
+
+      <h2 className={styles.title}>
+        {selectCategory === 'Все' ? 'Все вина' : selectCategory}
+      </h2>
+
+      {wineStatus === 'error'
+        ? <ShopError />
+        : <div className={styles.items}>
+          {wineStatus === 'loading'
+            ? [...new Array(8)].map((_, index) => <SkeletonWineCard key={index} />)
+            : <WineList wine={wine} />}
+        </div>}
     </>
   );
 };

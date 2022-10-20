@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addItem } from '../../redux/slices/cartSlice';
+import { addItem, cartItemSelector } from '../../redux/slices/cartSlice';
 
 import styles from './WineCard.module.scss';
 
-const WineCard = ({ _id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
+const WineCard = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
   const dispatch = useDispatch()
 
-  const cartItem = useSelector(state => state.cart.items.find(item => item._id === _id))
+  const cartItem = useSelector(cartItemSelector(id))
 
   const [selectType, setSelectType] = useState(0);
   const [selectSize, setSelectSize] = useState(0);
 
   const onClickAdd = () => {
     const item = {
-      _id,
+      id,
       imageUrl,
       title,
       bottleType: bottleTypes[selectType],

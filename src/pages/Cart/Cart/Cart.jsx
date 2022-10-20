@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { clearCart } from '../../../redux/slices/cartSlice';
+import { cartSelector, clearCart } from '../../../redux/slices/cartSlice';
 
 import CartItem from '../CartItem/CartItem';
 import CartEmpty from '../CartEmpty/CartEmpty';
@@ -12,7 +12,7 @@ import styles from './Cart.module.scss';
 const Cart = () => {
   const dispatch = useDispatch()
 
-  const { items, totalPrice } = useSelector(state => state.cart)
+  const { items, totalPrice } = useSelector(cartSelector)
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
 
@@ -48,7 +48,7 @@ const Cart = () => {
 
       <div className="cart__items">
         {items && items.map(item =>
-          <CartItem {...item} key={item._id} />
+          <CartItem {...item} key={item.id} />
         )}
       </div>
 
