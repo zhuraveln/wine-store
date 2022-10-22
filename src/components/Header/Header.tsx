@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { cartSelector } from '../../redux/slices/cartSlice';
 
 import SearchBar from '../SearchBar/SearchBar';
 
-import styles from './Header.module.scss'
+import styles from './Header.module.scss';
 
-const Header = () => {
-  const { pathname } = useLocation()
+const Header: React.FC = () => {
+  const { pathname } = useLocation();
 
-  const { items, totalPrice } = useSelector(cartSelector)
+  const { items, totalPrice } = useSelector(cartSelector);
 
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   return (
     <div className={styles.root}>
@@ -63,7 +63,7 @@ const Header = () => {
         <span>{totalCount}</span>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

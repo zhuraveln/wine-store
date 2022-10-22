@@ -1,28 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { filterSearchSelector } from '../../redux/slices/filterSearchSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterSelector, setSort, SortType } from '../../redux/slices/filterSlice';
+import { sortTypes } from '../../redux/slices/filterSlice';
 
 import styles from './Sort.module.scss';
 
-const Sort = ({ sort, changeSort }) => {
-  const { sortTypes } = useSelector(filterSearchSelector);
-  const sortRef = useRef()
+const Sort: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const { sortBy } = useSelector(filterSelector);
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
 
+  const changeSort = (sortType: SortType) => {
+    dispatch(setSort(sortType));
+  };
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      const path = event.composedPath()
-      if (!path.includes(sortRef.current)) {
-        setOpen(false)
+    const handleClickOutside = (event: MouseEvent) => {
+      const path = event.composedPath();
+      if (sortRef.current && !path.includes(sortRef.current)) {
+        setOpen(false);
       }
-    }
+    };
 
-    document.body.addEventListener('click', handleClickOutside)
+    document.body.addEventListener('click', handleClickOutside);
 
-    return () => document.body.removeEventListener('click', handleClickOutside)
-  }, [])
-
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
 
   return (
     <div ref={sortRef} className={styles.root}>
@@ -40,14 +46,14 @@ const Sort = ({ sort, changeSort }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sort.name}</span>
+        <span onClick={() => setOpen(!open)}>{sortBy.name}</span>
       </div>
       {open && (
         <div className={styles.popup}>
           <ul>
             {sortTypes.map((obj, index) => (
               <li
-                className={sort.sortProperty === obj.sortProperty ? `${styles.active}` : ''}
+                className={sortBy.sortProperty === obj.sortProperty ? `${styles.active}` : ''}
                 onClick={() => {
                   changeSort(obj);
                   setOpen(false);

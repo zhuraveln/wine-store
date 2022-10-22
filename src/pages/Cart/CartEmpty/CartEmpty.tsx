@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './CartEmpty.module.scss';
 
-const CartEmpty = () => {
+const CartEmpty: React.FC = () => {
   return (
     <div className={styles.empty}>
       <h2>Корзина пустая 😕</h2>
@@ -16,7 +16,7 @@ const CartEmpty = () => {
         <span>Вернуться в магазин</span>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default CartEmpty
+export default CartEmpty;

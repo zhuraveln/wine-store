@@ -2,30 +2,32 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addItem, cartItemSelector } from '../../redux/slices/cartSlice';
+import { addItem, CartItem, cartItemSelector } from '../../redux/slices/cartSlice';
+import { WineItem } from '../../redux/slices/wineSlice';
 
 import styles from './WineCard.module.scss';
 
-const WineCard = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
-  const dispatch = useDispatch()
+const WineCard: React.FC<WineItem> = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
+  const dispatch = useDispatch();
 
-  const cartItem = useSelector(cartItemSelector(id))
+  const cartItem = useSelector(cartItemSelector(id));
 
-  const [selectType, setSelectType] = useState(0);
-  const [selectSize, setSelectSize] = useState(0);
+  const [selectType, setSelectType] = useState<number>(0);
+  const [selectSize, setSelectSize] = useState<number>(0);
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       imageUrl,
       title,
       bottleType: bottleTypes[selectType],
       bottleSize: bottleSizes[selectSize],
-      price
-    }
+      price,
+      count: 0, // TODO
+    };
 
-    dispatch(addItem(item))
-  }
+    dispatch(addItem(item));
+  };
 
   return (
     <div className={styles.root}>
@@ -59,10 +61,7 @@ const WineCard = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.price}>{price} ₽</div>
-        <button
-          onClick={onClickAdd}
-          className={styles.buttonAdd}
-        >
+        <button onClick={onClickAdd} className={styles.buttonAdd}>
           <svg
             width="12"
             height="12"

@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const SkeletonWineCard = () => (
+const SkeletonWineCard: React.FC = () => (
   <ContentLoader
     speed={2}
     width={295}

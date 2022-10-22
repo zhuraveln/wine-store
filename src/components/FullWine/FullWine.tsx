@@ -1,55 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import ShopError from '../../pages/Shop/ShopError/ShopError';
-import { addItem, cartItemSelector } from '../../redux/slices/cartSlice';
+import { addItem, CartItem, cartItemSelector } from '../../redux/slices/cartSlice';
 import { fetchOneWine, wineSelector } from '../../redux/slices/wineSlice';
+import { useAppDispatch } from '../../redux/store';
 
 import styles from './FullWine.module.scss';
 
-const FullWine = () => {
-  const dispatch = useDispatch()
+type ParamTypes = {
+  id: string;
+};
+
+const FullWine: React.FC = () => {
+  const dispatch = useAppDispatch();
 
   const [selectType, setSelectType] = useState(0);
   const [selectSize, setSelectSize] = useState(0);
 
   const { selectWine, selectWineStatus } = useSelector(wineSelector);
-  const { imageUrl, title, bottleTypes, bottleSizes, price } = selectWine
-  const { id } = useParams()
+  const { imageUrl, title, bottleTypes, bottleSizes, price } = selectWine;
+  const { id } = useParams() as { id: string };
 
-  const cartItem = useSelector(cartItemSelector(id))
-
-  const fetchWine = (id) => {
-    dispatch(fetchOneWine({ id }));
-  };
-
-  useEffect(() => {
-    console.log('effect');
-    fetchWine(id)
-  }, [])
+  const cartItem = useSelector(cartItemSelector(id));
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       imageUrl,
       title,
       bottleType: bottleTypes[selectType],
       bottleSize: bottleSizes[selectSize],
-      price
-    }
+      price,
+      count: 0,
+    };
 
-    dispatch(addItem(item))
-  }
+    dispatch(addItem(item));
+  };
+
+  useEffect(() => {
+    dispatch(fetchOneWine({ id }));
+  }, []);
 
   return (
     <>
-      {selectWineStatus === 'error'
-        ? <ShopError />
-        : <>
-          {selectWineStatus === 'loading'
-            ? <p>Loading...</p>
-            : <div className={styles.root}>
-
+      {selectWineStatus === 'error' ? (
+        <ShopError />
+      ) : (
+        <>
+          {selectWineStatus === 'loading' ? (
+            <p>Loading...</p>
+          ) : (
+            <div className={styles.root}>
               <Link to="/" className={styles.buttonBack}>
                 <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
                   <path d="M39.3756,48.0022l30.47-25.39a6.0035,6.0035,0,0,0-7.6878-9.223L26.1563,43.3906a6.0092,6.0092,0,0,0,0,9.2231L62.1578,82.615a6.0035,6.0035,0,0,0,7.6878-9.2231Z" />
@@ -87,10 +89,7 @@ const FullWine = () => {
                   </div>
                   <div className={styles.bottom}>
                     <div className={styles.price}>{price} ₽</div>
-                    <button
-                      onClick={onClickAdd}
-                      className={styles.buttonAdd}
-                    >
+                    <button onClick={onClickAdd} className={styles.buttonAdd}>
                       <svg
                         width="12"
                         height="12"
@@ -114,11 +113,12 @@ const FullWine = () => {
                 <h2></h2>
                 <p></p>
               </div>
-            </div>}
-        </>}
+            </div>
+          )}
+        </>
+      )}
     </>
+  );
+};
 
-  )
-}
-
-export default FullWine
+export default FullWine;

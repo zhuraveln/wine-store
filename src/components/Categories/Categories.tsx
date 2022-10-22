@@ -1,11 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { filterSearchSelector } from '../../redux/slices/filterSearchSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterSelector, setCategory } from '../../redux/slices/filterSlice';
+import { categories } from '../../redux/slices/filterSlice';
 
 import styles from './Categories.module.scss';
 
-const Categories = ({ category, changeCategory }) => {
-  const { categories } = useSelector(filterSearchSelector);
+const Categories: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const { category } = useSelector(filterSelector);
+
+  const changeCategory = (value: string) => {
+    dispatch(setCategory(value));
+  };
 
   return (
     <div className={styles.root}>
