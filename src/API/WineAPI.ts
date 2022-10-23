@@ -11,11 +11,10 @@ export default class WineAPI {
     const orderType = sortBy.sortProperty.includes('-') ? 'asc' : 'desc';
 
     const response = await axios.get<WineItem[]>(
-      // process.env.REACT_APP_API_URL
-      // // ||
-      // `http://localhost:${process.env.REACT_APP_PORT}/`
-      // ||
-      `${process.env.REACT_APP_MOCK_API}?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${search}`,
+      `${process.env.REACT_APP_API_URL}?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${search}` ||
+        // `http://localhost:${process.env.REACT_APP_PORT}/`
+        // ||
+        `${process.env.REACT_APP_MOCK_API}?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${search}`,
     );
 
     return response.data;
@@ -23,7 +22,9 @@ export default class WineAPI {
 
   // Get One Wine from server
   static async getOneWine(id: string) {
-    const response = await axios.get<WineItem>(`${process.env.REACT_APP_MOCK_API}/${id}`);
+    const response = await axios.get<WineItem>(
+      `${process.env.REACT_APP_API_URL}/${id}` || `${process.env.REACT_APP_MOCK_API}/${id}`,
+    );
     return response.data;
   }
 }
