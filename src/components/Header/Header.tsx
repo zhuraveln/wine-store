@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { cartSelector } from '../../redux/slices/cartSlice';
+import { cartSelector } from '../../redux/cart/selectors';
 
 import SearchBar from '../SearchBar/SearchBar';
 

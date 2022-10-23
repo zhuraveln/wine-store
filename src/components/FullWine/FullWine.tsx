@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import ShopError from '../../pages/Shop/ShopError/ShopError';
-import { addItem, CartItem, cartItemSelector } from '../../redux/slices/cartSlice';
-import { fetchOneWine, wineSelector } from '../../redux/slices/wineSlice';
+import { cartItemSelector } from '../../redux/cart/selectors';
+import { addItem } from '../../redux/cart/slice';
+import { CartItem } from '../../redux/cart/types';
+
 import { useAppDispatch } from '../../redux/store';
+import { fetchOneWine } from '../../redux/wine/asyncActions';
+import { wineSelector } from '../../redux/wine/selectors';
 
 import styles from './FullWine.module.scss';
-
-type ParamTypes = {
-  id: string;
-};
 
 const FullWine: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -110,8 +110,8 @@ const FullWine: React.FC = () => {
               </div>
 
               <div className={styles.description}>
-                <h2></h2>
-                <p></p>
+                <h2>Заголовок описания</h2>
+                <p>Описание</p>
               </div>
             </div>
           )}

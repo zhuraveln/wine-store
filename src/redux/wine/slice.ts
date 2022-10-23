@@ -1,56 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import WineAPI from '../../API/WineAPI';
-import { RootState } from '../store';
-import { SortType } from './filterSlice';
-
-export type fetchAllWineParams = {
-  category: string;
-  sortBy: SortType;
-  search: string;
-};
-
-export const fetchAllWine = createAsyncThunk(
-  'wine/fetchAllWineStatus',
-  async (params: fetchAllWineParams) => {
-    const { category, sortBy, search } = params;
-
-    const data = await WineAPI.getAllWine(category, sortBy, search);
-    return data;
-  },
-);
-
-export const fetchOneWine = createAsyncThunk(
-  'wine/fetchOneWineStatus',
-  async (params: Record<string, string>) => {
-    const { id } = params;
-    const data = await WineAPI.getOneWine(id);
-    return data;
-  },
-);
-
-export type WineItem = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  category: string;
-  bottleSizes: number[];
-  bottleTypes: string[];
-  price: number;
-  rating: number;
-};
-
-export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-interface WineSliceState {
-  wine: WineItem[];
-  wineStatus: Status;
-  selectWine: WineItem;
-  selectWineStatus: Status;
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchAllWine, fetchOneWine } from './asyncActions';
+import { Status, WineItem, WineSliceState } from './types';
 
 const initialState: WineSliceState = {
   wine: [] as WineItem[],
@@ -94,7 +44,5 @@ export const wineSlice = createSlice({
     });
   },
 });
-
-export const wineSelector = (state: RootState) => state.wine;
 
 export default wineSlice.reducer;

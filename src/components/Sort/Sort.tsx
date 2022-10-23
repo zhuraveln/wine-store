@@ -1,14 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { filterSelector, setSort, SortType } from '../../redux/slices/filterSlice';
-import { sortTypes } from '../../redux/slices/filterSlice';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSort } from '../../redux/filter/slice';
+import { SortType, sortTypes } from '../../redux/filter/types';
 
 import styles from './Sort.module.scss';
 
-const Sort: React.FC = () => {
+type SortProps = {
+  value: SortType;
+};
+
+const Sort: React.FC<SortProps> = memo(({ value }) => {
   const dispatch = useDispatch();
 
-  const { sortBy } = useSelector(filterSelector);
+  const sortBy = value;
   const sortRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
@@ -68,6 +72,6 @@ const Sort: React.FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;

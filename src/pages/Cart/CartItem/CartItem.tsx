@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { addItem, removeItem, removeAllItems, CartItem } from '../../../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 
 import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
+import { CartItem } from '../../../redux/cart/types';
+import { addItem, removeAllItems, removeItem } from '../../../redux/cart/slice';
 
 type CartItemProps = {
   id: string;
@@ -48,7 +49,7 @@ const CartItemWine: React.FC<CartItemProps> = ({
       </Link>
 
       <div className={styles.count}>
-        <div onClick={itemMinus} className={styles.buttonCount}>
+        <button onClick={itemMinus} className={styles.buttonCount} disabled={count === 1}>
           <svg
             width="10"
             height="10"
@@ -61,11 +62,11 @@ const CartItemWine: React.FC<CartItemProps> = ({
               fill="#EB5A1E"
             ></path>
           </svg>
-        </div>
+        </button>
 
         <b>{count}</b>
 
-        <div onClick={itemPlus} className={styles.buttonCount}>
+        <button onClick={itemPlus} className={styles.buttonCount}>
           <svg
             width="10"
             height="10"
@@ -82,7 +83,7 @@ const CartItemWine: React.FC<CartItemProps> = ({
               fill="#EB5A1E"
             ></path>
           </svg>
-        </div>
+        </button>
       </div>
 
       <div className={styles.price}>

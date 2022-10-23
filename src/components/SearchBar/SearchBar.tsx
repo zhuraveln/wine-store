@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import styles from './SearchBar.module.scss';
 
 import { useDispatch } from 'react-redux';
-import { setSearch } from '../../redux/slices/filterSlice';
+import { setSearch } from '../../redux/filter/slice';
 
 const SearchBar: React.FC = () => {
   const dispatch = useDispatch();

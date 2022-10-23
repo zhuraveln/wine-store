@@ -1,5 +1,6 @@
 import React from 'react';
-import { WineItem } from '../redux/slices/wineSlice';
+import { WineItem } from '../redux/wine/types';
+
 import WineCard from './WineCard/WineCard';
 
 type WineProps = { wine: WineItem[] };

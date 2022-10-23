@@ -1,14 +1,18 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { filterSelector, setCategory } from '../../redux/slices/filterSlice';
-import { categories } from '../../redux/slices/filterSlice';
+import React, { memo } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCategory } from '../../redux/filter/slice';
+import { categories } from '../../redux/filter/types';
 
 import styles from './Categories.module.scss';
 
-const Categories: React.FC = () => {
+type CategoriesProps = {
+  value: string;
+};
+
+const Categories: React.FC<CategoriesProps> = memo(({ value }) => {
   const dispatch = useDispatch();
 
-  const { category } = useSelector(filterSelector);
+  const category = value;
 
   const changeCategory = (value: string) => {
     dispatch(setCategory(value));
@@ -29,6 +33,6 @@ const Categories: React.FC = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default Categories;

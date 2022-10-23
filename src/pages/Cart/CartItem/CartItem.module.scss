@@ -54,6 +54,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #fff;
     width: 32px;
     height: 32px;
     border-radius: 30px;
@@ -66,6 +67,22 @@
 
       svg path {
         fill: #fff;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      background-color: #ffffff;
+      border-color: #787878;
+
+      svg path {
+        fill: #787878;
+      }
+
+      &:hover {
+        svg path {
+          border-color: #787878;
+        }
       }
     }
   }

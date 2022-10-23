@@ -1,33 +1,34 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { cartSelector, clearCart } from '../../redux/slices/cartSlice';
 
 import CartItem from './CartItem/CartItem';
 import CartEmpty from './CartEmpty/CartEmpty';
 
 import styles from './Cart.module.scss';
+import { cartSelector } from '../../redux/cart/selectors';
+import { clearCart } from '../../redux/cart/slice';
 
 const Cart = () => {
-  const dispatch = useDispatch()
+  console.log('render');
 
-  const { items, totalPrice } = useSelector(cartSelector)
+  const dispatch = useDispatch();
 
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+  const { items, totalPrice } = useSelector(cartSelector);
 
-  const clearAll = () => dispatch(clearCart())
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
-  if (!totalCount) return <CartEmpty />
+  const clearAll = () => dispatch(clearCart());
+
+  if (!totalCount) return <CartEmpty />;
 
   return (
     <div className={styles.root}>
-
       <div className={styles.top}>
-
         <div className={styles.title}>
           <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0h48v48H0z" fill="none" /><path d="M34.42 18L25.66 4.89c-.38-.58-1.02-.85-1.66-.85-.64 0-1.28.28-1.66.85L13.58 18H4c-1.1 0-2 .9-2 2 0 .19.03.37.07.54l5.07 18.54C7.61 40.76 9.16 42 11 42h26c1.84 0 3.39-1.24 3.85-2.93l5.07-18.54c.05-.16.08-.34.08-.53 0-1.1-.9-2-2-2h-9.58zM18 18l6-8.8 6 8.8H18zm6 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
+            <path d="M0 0h48v48H0z" fill="none" />
+            <path d="M34.42 18L25.66 4.89c-.38-.58-1.02-.85-1.66-.85-.64 0-1.28.28-1.66.85L13.58 18H4c-1.1 0-2 .9-2 2 0 .19.03.37.07.54l5.07 18.54C7.61 40.76 9.16 42 11 42h26c1.84 0 3.39-1.24 3.85-2.93l5.07-18.54c.05-.16.08-.34.08-.53 0-1.1-.9-2-2-2h-9.58zM18 18l6-8.8 6 8.8H18zm6 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
           </svg>
           <h2>Корзина</h2>
         </div>
@@ -47,15 +48,19 @@ const Cart = () => {
       </div>
 
       <div className="cart__items">
-        {items && items.map(item =>
-          <CartItem {...item} key={item.id} />
-        )}
+        {items && items.map((item) => <CartItem {...item} key={item.id} />)}
       </div>
 
       <div className={styles.bottom}>
         <div className={styles.details}>
-          <p> Всего товаров: <b>{totalCount} шт.</b> </p>
-          <p> Сумма заказа: <b>{totalPrice} ₽</b> </p>
+          <p>
+            {' '}
+            Всего товаров: <b>{totalCount} шт.</b>{' '}
+          </p>
+          <p>
+            {' '}
+            Сумма заказа: <b>{totalPrice} ₽</b>{' '}
+          </p>
         </div>
         <div className={styles.buttons}>
           <Link to="/" className={styles.buttonBack}>
@@ -70,7 +75,7 @@ const Cart = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

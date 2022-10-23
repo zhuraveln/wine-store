@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { addItem, CartItem, cartItemSelector } from '../../redux/slices/cartSlice';
-import { WineItem } from '../../redux/slices/wineSlice';
+import { cartItemSelector } from '../../redux/cart/selectors';
+import { addItem } from '../../redux/cart/slice';
+import { CartItem } from '../../redux/cart/types';
+import { WineItem } from '../../redux/wine/types';
 
 import styles from './WineCard.module.scss';
 

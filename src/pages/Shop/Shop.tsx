@@ -4,14 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
-import {
-  setFilters,
-  filterSelector,
-  sortTypes,
-  filterSliceState,
-} from '../../redux/slices/filterSlice';
-import { fetchAllWine, Status, wineSelector } from '../../redux/slices/wineSlice';
-
 import Categories from '../../components/Categories/Categories';
 import Sort from '../../components/Sort/Sort';
 import SkeletonWineCard from '../../components/WineCard/SkeletonWineCard';
@@ -20,6 +12,12 @@ import ShopError from './ShopError/ShopError';
 
 import styles from './Shop.module.scss';
 import { useAppDispatch } from '../../redux/store';
+import { wineSelector } from '../../redux/wine/selectors';
+import { filterSelector } from '../../redux/filter/selectors';
+import { filterSliceState, sortTypes } from '../../redux/filter/types';
+import { setFilters } from '../../redux/filter/slice';
+import { fetchAllWine } from '../../redux/wine/asyncActions';
+import { Status } from '../../redux/wine/types';
 
 const Shop: React.FC = () => {
   const navigate = useNavigate();
@@ -84,8 +82,8 @@ const Shop: React.FC = () => {
   return (
     <>
       <div className={styles.top}>
-        <Categories />
-        <Sort />
+        <Categories value={category} />
+        <Sort value={sortBy} />
       </div>
 
       <h2 className={styles.title}>{category === 'Все' ? 'Все вина' : category}</h2>

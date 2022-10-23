@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { SortType } from '../redux/slices/filterSlice';
-import { WineItem } from '../redux/slices/wineSlice';
+import { SortType } from '../redux/filter/types';
+import { WineItem } from '../redux/wine/types';
 
 export default class WineAPI {
   // Get All Wine from server
