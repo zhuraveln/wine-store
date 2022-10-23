@@ -3,27 +3,40 @@
 .root {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
 
   .info {
     display: flex;
+    justify-content: center;
+
+    .image {
+      height: 300px;
+      width: 400px;
+    }
+
+    .description {
+      width: 30%;
+      text-align: left;
+      margin-left: -70px;
+      margin-right: 45px;
+
+      .title {
+        font-size: 45px;
+        font-weight: 900;
+        letter-spacing: 1%;
+        margin-bottom: 20px;
+      }
+
+      .text {
+        font-size: 19px;
+      }
+    }
 
     .options {
       width: 280px;
       text-align: center;
       margin-right: 15px;
       margin-bottom: 65px;
-
-      .image {
-        width: 260px;
-      }
-
-      .title {
-        font-size: 20px;
-        font-weight: 900;
-        letter-spacing: 1%;
-        margin-bottom: 20px;
-      }
 
       .selector {
         display: flex;
@@ -125,18 +138,17 @@
     }
   }
 
-  .description {
-  }
-
   .buttonBack {
     display: flex;
-    align-self: center;
+    align-self: flex-start;
     width: 230px;
     min-width: 100px;
     border-radius: 30px;
     padding: 15px 20px;
+    margin-bottom: 35px;
     background: $orange;
     border: 1px solid $orange;
+    opacity: 0.9;
     cursor: pointer;
     transition: all $duration ease-in-out;
 

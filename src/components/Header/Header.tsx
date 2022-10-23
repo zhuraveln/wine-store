@@ -18,7 +18,10 @@ const Header: React.FC = () => {
     <div className={styles.root}>
       <Link to="/">
         <div className={styles.logo}>
-          <img src="img/logo.png" alt="Wine logo" />
+          <img
+            src="https://drive.google.com/thumbnail?id=1NW-DfPS1zHw3HDvm5apz7m7CpheY8q-3"
+            alt="Wine logo"
+          />
           <div>
             <h1>Wine store</h1>
             <p>Лучшее вино на побережье</p>
@@ -26,7 +29,7 @@ const Header: React.FC = () => {
         </div>
       </Link>
 
-      {pathname !== '/cart' && <SearchBar />}
+      {pathname === '/' && <SearchBar />}
 
       <Link to="/cart" className={styles.buttonCart}>
         <span>{totalPrice} ₽</span>

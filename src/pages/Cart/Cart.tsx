@@ -54,12 +54,10 @@ const Cart = () => {
       <div className={styles.bottom}>
         <div className={styles.details}>
           <p>
-            {' '}
-            Всего товаров: <b>{totalCount} шт.</b>{' '}
+            Всего товаров: <b>{totalCount} шт.</b>
           </p>
           <p>
-            {' '}
-            Сумма заказа: <b>{totalPrice} ₽</b>{' '}
+            Сумма заказа: <b>{totalPrice} ₽</b>
           </p>
         </div>
         <div className={styles.buttons}>

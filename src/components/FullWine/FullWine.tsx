@@ -59,10 +59,16 @@ const FullWine: React.FC = () => {
                 <span>Вернуться в магазин</span>
               </Link>
               <div className={styles.info}>
-                <img src={imageUrl} alt="Wine logo" />
+                <img className={styles.image} src={imageUrl} alt="Wine logo" />
+                <div className={styles.description}>
+                  <h2 className={styles.title}>{title}</h2>
+                  <p className={styles.text}>
+                    Лучшее вино сделанное в лучшем городе из лучшего винограда лучшими людьми в
+                    лучшем расположении духа в лучшие года своей жизни.
+                  </p>
+                </div>
                 <div className={styles.options}>
-                  <img className={styles.image} src={imageUrl} alt="wine" />
-                  <h4 className={styles.title}>{title}</h4>
+                  {/* <h4 className={styles.title}>{title}</h4> */}
                   <div className={styles.selector}>
                     <ul>
                       {bottleTypes.map((type, index) => (
@@ -107,11 +113,6 @@ const FullWine: React.FC = () => {
                     </button>
                   </div>
                 </div>
-              </div>
-
-              <div className={styles.description}>
-                <h2>Заголовок описания</h2>
-                <p>Описание</p>
               </div>
             </div>
           )}
