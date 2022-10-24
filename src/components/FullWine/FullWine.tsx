@@ -68,7 +68,6 @@ const FullWine: React.FC = () => {
                   </p>
                 </div>
                 <div className={styles.options}>
-                  {/* <h4 className={styles.title}>{title}</h4> */}
                   <div className={styles.selector}>
                     <ul>
                       {bottleTypes.map((type, index) => (

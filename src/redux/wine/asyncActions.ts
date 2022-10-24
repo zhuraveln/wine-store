@@ -17,6 +17,7 @@ export const fetchOneWine = createAsyncThunk(
   async (params: Record<string, string>) => {
     const { id } = params;
     const data = await WineAPI.getOneWine(id);
+
     return data;
   },
 );

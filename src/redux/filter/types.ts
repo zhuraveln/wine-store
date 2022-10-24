@@ -1,6 +1,6 @@
 export enum SortPropertyEnum {
   RATING_DESCENDING = 'rating',
-  RATING_ASCENDING = '-rating',
+  // RATING_ASCENDING = '-rating',
   PRICE_DESCENDING = 'price',
   PRICE_ASCENDING = '-price',
 }
@@ -11,10 +11,10 @@ export type SortType = {
 };
 
 export const sortTypes: SortType[] = [
-  { name: 'популярности (DESC)', sortProperty: SortPropertyEnum.RATING_DESCENDING },
-  { name: 'популярности (ASC)', sortProperty: SortPropertyEnum.RATING_ASCENDING },
-  { name: 'цене (DESC)', sortProperty: SortPropertyEnum.PRICE_DESCENDING },
-  { name: 'цене (ASC)', sortProperty: SortPropertyEnum.PRICE_ASCENDING },
+  { name: 'популярные', sortProperty: SortPropertyEnum.RATING_DESCENDING },
+  // { name: 'популярности (ASC)', sortProperty: SortPropertyEnum.RATING_ASCENDING },
+  { name: 'дорогие', sortProperty: SortPropertyEnum.PRICE_DESCENDING },
+  { name: 'дешевые', sortProperty: SortPropertyEnum.PRICE_ASCENDING },
 ];
 
 export const categories: string[] = ['Все', 'Красное', 'Белое', 'Чача'];
@@ -24,9 +24,3 @@ export interface filterSliceState {
   sortBy: SortType;
   search: string;
 }
-
-export const initialState: filterSliceState = {
-  category: 'Все',
-  sortBy: { name: 'популярности', sortProperty: SortPropertyEnum.RATING_DESCENDING },
-  search: '',
-};

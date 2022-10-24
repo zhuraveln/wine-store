@@ -42,7 +42,7 @@ const CartItemWine: React.FC<CartItemProps> = ({
         <div className={styles.info}>
           <h3>{title}</h3>
           <p>
-            {bottleType}, {bottleSize} л.
+            {bottleType} {bottleSize} л.
           </p>
           <p>{price} ₽</p>
         </div>

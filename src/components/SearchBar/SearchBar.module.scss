@@ -1,17 +1,51 @@
-.root {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 12px 20px;
-  width: 350px;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: all 0.35s ease-in-out;
+@import '/src/scss/variables.scss';
 
-  &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.25);
+.root {
+  .searchIcon {
+    position: relative;
+    left: 30px;
+    top: 3px;
+    height: 18px;
+    width: 18px;
+    opacity: 0.4;
   }
 
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    width: 450px;
+  input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 38px;
+    width: 350px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.35s ease-in-out;
+
+    &:hover {
+      border: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    &:focus {
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      width: 450px;
+    }
+  }
+
+  .deleteIcon {
+    position: relative;
+    right: 30px;
+    top: 3px;
+    height: 16px;
+    width: 16px;
+    opacity: 0.4;
+    transform: rotate(45deg);
+
+    path {
+      fill: rgb(153, 153, 153);
+      transition: all $duration ease-in-out;
+    }
+
+    &:hover {
+      path {
+        fill: black;
+      }
+    }
   }
 }

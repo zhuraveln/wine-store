@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CartItem from './CartItem/CartItem';
 import CartEmpty from './CartEmpty/CartEmpty';
 
 import styles from './Cart.module.scss';
 import { cartSelector } from '../../redux/cart/selectors';
+import Modal from '../../components/Modal/Modal';
 import { clearCart } from '../../redux/cart/slice';
 
-const Cart = () => {
-  console.log('render');
-
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
+
+  const [modalVisible, modalSetVisible] = useState(false);
 
   const { items, totalPrice } = useSelector(cartSelector);
 
@@ -67,11 +68,18 @@ const Cart = () => {
             </svg>
             <span>Вернуться назад</span>
           </Link>
-          <div className={styles.buttonPay}>
-            <span>Оплатить сейчас</span>
-          </div>
+          <Link to="/cart/confirm" onClick={clearAll}>
+            <div className={styles.buttonPay}>
+              <span>Оплатить сейчас</span>
+            </div>
+          </Link>
         </div>
       </div>
+      <Modal
+        text={'Вы точно хотите отчистить корзину?'}
+        visible={modalVisible}
+        setVisible={modalSetVisible}
+      />
     </div>
   );
 };

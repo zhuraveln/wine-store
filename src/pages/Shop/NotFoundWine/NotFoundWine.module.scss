@@ -1,0 +1,62 @@
+@import '/src/scss/variables.scss';
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+  width: 560px;
+  text-align: center;
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 145.4%;
+    letter-spacing: 0.01em;
+    color: #777777;
+  }
+
+  img {
+    display: block;
+    width: 200px;
+    margin: 45px auto 60px;
+  }
+
+  .buttonBack {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 230px;
+    min-width: 100px;
+    border-radius: 30px;
+    padding: 15px 20px;
+    background: $orange;
+    border: 1px solid $orange;
+    cursor: pointer;
+    transition: all $duration ease-in-out;
+
+    svg {
+      height: 16px;
+      width: 14px;
+      margin-right: 5px;
+
+      path {
+        fill: #fff;
+      }
+    }
+
+    span {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: darken($orange, 8%);
+      border-color: darken($orange, 8%);
+    }
+  }
+}

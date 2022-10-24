@@ -22,10 +22,15 @@ export default class WineAPI {
 
   // Get One Wine from server
   static async getOneWine(id: string) {
-    const response = await axios.get<WineItem>(
-      // `${process.env.REACT_APP_API_URL}/${id}` ||
-      `${process.env.REACT_APP_MOCK_API}/${id}`,
-    );
+    const response = await axios.get<WineItem>(`${process.env.REACT_APP_MOCK_API}/${id}`);
+
     return response.data;
+
+    // await axios
+    //   .get<WineItem>(`${process.env.REACT_APP_MOCK_API}/${id}`)
+    //   .then((response) => response.data);
+    // .catch((error) => console.log(error.response));
+
+    // return response;
   }
 }

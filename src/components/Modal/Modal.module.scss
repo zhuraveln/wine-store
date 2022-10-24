@@ -1,0 +1,56 @@
+@import '/src/scss/variables.scss';
+
+.myModal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.myModalContent {
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  min-width: 250px;
+}
+
+.myModal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  text-align: center;
+  font-size: 21px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+
+  .button {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    min-width: 100px;
+    border-radius: 30px;
+    padding: 15px 20px;
+    margin-right: 5px;
+    background-color: $orange;
+    cursor: pointer;
+    transition: background-color $duration ease-in-out;
+
+    span {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    &:hover {
+      background-color: darken($orange, 8%);
+    }
+  }
+}

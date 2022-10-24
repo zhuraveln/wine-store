@@ -37,19 +37,62 @@ const Sort: React.FC<SortProps> = memo(({ value }) => {
   return (
     <div ref={sortRef} className={styles.root}>
       <div className={styles.label}>
-        <svg
-          width="10"
-          height="6"
-          viewBox="0 0 10 6"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10 5C10 5.16927 9.93815 5.31576 9.81445 5.43945C9.69075 5.56315 9.54427 5.625 9.375 5.625H0.625C0.455729 5.625 0.309245 5.56315 0.185547 5.43945C0.061849 5.31576 0 5.16927 0 5C0 4.83073 0.061849 4.68424 0.185547 4.56055L4.56055 0.185547C4.68424 0.061849 4.83073 0 5 0C5.16927 0 5.31576 0.061849 5.43945 0.185547L9.81445 4.56055C9.93815 4.68424 10 4.83073 10 5Z"
-            fill="#2C2C2C"
+        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+          <rect fill="none" height="256" width="256" />
+          <polyline
+            fill="none"
+            points="144 168 184 208 224 168"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="24"
+          />
+          <line
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="24"
+            x1="184"
+            x2="184"
+            y1="112"
+            y2="208"
+          />
+          <line
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="24"
+            x1="48"
+            x2="120"
+            y1="128"
+            y2="128"
+          />
+          <line
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="24"
+            x1="48"
+            x2="184"
+            y1="64"
+            y2="64"
+          />
+          <line
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="24"
+            x1="48"
+            x2="104"
+            y1="192"
+            y2="192"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Сортировка: </b>
         <span onClick={() => setOpen(!open)}>{sortBy.name}</span>
       </div>
       {open && (

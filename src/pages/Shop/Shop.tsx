@@ -18,6 +18,7 @@ import { filterSliceState, sortTypes } from '../../redux/filter/types';
 import { setFilters } from '../../redux/filter/slice';
 import { fetchAllWine } from '../../redux/wine/asyncActions';
 import { Status } from '../../redux/wine/types';
+import NotFoundWine from './NotFoundWine/NotFoundWine';
 
 const Shop: React.FC = () => {
   const navigate = useNavigate();
@@ -86,7 +87,11 @@ const Shop: React.FC = () => {
         <Sort value={sortBy} />
       </div>
 
-      <h2 className={styles.title}>{category === 'Все' ? 'Все вина' : category}</h2>
+      {wine.length ? (
+        <h2 className={styles.title}>{category === 'Все' ? 'Все вина' : category}</h2>
+      ) : (
+        ''
+      )}
 
       {wineStatus === Status.ERROR ? (
         <ShopError />
@@ -94,8 +99,10 @@ const Shop: React.FC = () => {
         <div className={styles.items}>
           {wineStatus === Status.LOADING ? (
             [...new Array(8)].map((_, index) => <SkeletonWineCard key={index} />)
-          ) : (
+          ) : wine.length ? (
             <WineList wine={wine} />
+          ) : (
+            <NotFoundWine />
           )}
         </div>
       )}

@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { filterSliceState, initialState, SortType } from './types';
+import { categories, filterSliceState, SortPropertyEnum, SortType } from './types';
+
+export const initialState: filterSliceState = {
+  category: categories[0],
+  // sortBy: sortTypes[0],
+  sortBy: { name: 'популярные', sortProperty: SortPropertyEnum.RATING_DESCENDING },
+  search: '',
+};
 
 export const filterSlice = createSlice({
   name: 'filter',
