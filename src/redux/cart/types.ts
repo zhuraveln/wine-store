@@ -12,8 +12,3 @@ export interface CartSliceState {
   items: CartItem[];
   totalPrice: number;
 }
-
-export const initialState: CartSliceState = {
-  items: [],
-  totalPrice: 0,
-};

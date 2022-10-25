@@ -44,7 +44,7 @@ const Cart: React.FC = () => {
               <path d="M405.81,135.66H122.32a15,15,0,0,1,0-30H405.81a15,15,0,0,1,0,30Z" />
             </g>
           </svg>
-          <p onClick={clearAll}>Очистить корзину</p>
+          <p onClick={() => modalSetVisible(true)}>Очистить корзину</p>
         </div>
       </div>
 
@@ -62,7 +62,7 @@ const Cart: React.FC = () => {
           </p>
         </div>
         <div className={styles.buttons}>
-          <Link to="/" className={styles.buttonBack}>
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className={styles.buttonBack}>
             <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
               <path d="M39.3756,48.0022l30.47-25.39a6.0035,6.0035,0,0,0-7.6878-9.223L26.1563,43.3906a6.0092,6.0092,0,0,0,0,9.2231L62.1578,82.615a6.0035,6.0035,0,0,0,7.6878-9.2231Z" />
             </svg>

@@ -15,22 +15,25 @@ import styles from './FullWine.module.scss';
 const FullWine: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const [selectType, setSelectType] = useState(0);
-  const [selectSize, setSelectSize] = useState(0);
-
   const { selectWine, selectWineStatus } = useSelector(wineSelector);
+
   const { imageUrl, title, bottleTypes, bottleSizes, price } = selectWine;
   const { id } = useParams() as { id: string };
 
-  const cartItem = useSelector(cartItemSelector(id));
+  const [selectType, setSelectType] = useState('Пластиковая бутылка');
+  const [selectSize, setSelectSize] = useState(1);
+
+  const bottlePrice = selectType === 'Стеклянная бутылка' ? 250 : 0;
+
+  const cartItem = useSelector(cartItemSelector(id, selectType, selectSize)); //TODO
 
   const onClickAdd = () => {
     const item: CartItem = {
       id,
       imageUrl,
       title,
-      bottleType: bottleTypes[selectType],
-      bottleSize: bottleSizes[selectSize],
+      bottleType: selectType,
+      bottleSize: selectSize,
       price,
       count: 0,
     };
@@ -72,8 +75,8 @@ const FullWine: React.FC = () => {
                     <ul>
                       {bottleTypes.map((type, index) => (
                         <li
-                          className={selectType === index ? `${styles.active}` : ''}
-                          onClick={() => setSelectType(index)}
+                          className={selectType === type ? `${styles.active}` : ''}
+                          onClick={() => setSelectType(type)}
                           key={index}
                         >
                           {type}
@@ -83,8 +86,8 @@ const FullWine: React.FC = () => {
                     <ul>
                       {bottleSizes.map((size, index) => (
                         <li
-                          className={selectSize === index ? `${styles.active}` : ''}
-                          onClick={() => setSelectSize(index)}
+                          className={selectSize === size ? `${styles.active}` : ''}
+                          onClick={() => setSelectSize(size)}
                           key={index}
                         >
                           {size} л.
@@ -93,7 +96,9 @@ const FullWine: React.FC = () => {
                     </ul>
                   </div>
                   <div className={styles.bottom}>
-                    <div className={styles.price}>{price} ₽</div>
+                    <div className={styles.price}>
+                      {Math.round(price * selectSize) + bottlePrice} ₽
+                    </div>
                     <button onClick={onClickAdd} className={styles.buttonAdd}>
                       <svg
                         width="12"

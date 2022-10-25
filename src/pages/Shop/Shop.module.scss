@@ -2,6 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 720px) {
+    flex-wrap: wrap;
+  }
 }
 
 .title {
@@ -11,5 +15,5 @@
 .items {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }

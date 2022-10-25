@@ -11,10 +11,12 @@ import styles from './WineCard.module.scss';
 const WineCard: React.FC<WineItem> = ({ id, imageUrl, title, bottleTypes, bottleSizes, price }) => {
   const dispatch = useDispatch();
 
-  const cartItem = useSelector(cartItemSelector(id));
+  const [selectType, setSelectType] = useState(0);
+  const [selectSize, setSelectSize] = useState(0);
 
-  const [selectType, setSelectType] = useState<number>(0);
-  const [selectSize, setSelectSize] = useState<number>(0);
+  const cartItem = useSelector(
+    cartItemSelector(id, bottleTypes[selectType], bottleSizes[selectSize]),
+  );
 
   const onClickAdd = () => {
     const item: CartItem = {
@@ -61,7 +63,9 @@ const WineCard: React.FC<WineItem> = ({ id, imageUrl, title, bottleTypes, bottle
         </ul>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.price}>{price} ₽</div>
+        <div className={styles.price}>
+          {Math.round(price * bottleSizes[selectSize]) + selectType * 250} ₽
+        </div>
         <button onClick={onClickAdd} className={styles.buttonAdd}>
           <svg
             width="12"

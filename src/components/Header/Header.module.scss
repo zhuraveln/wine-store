@@ -8,6 +8,14 @@
   padding: 40px 0;
   margin: 0 auto;
 
+  @media (max-width: 830px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 600px) {
+    padding: 20px 0;
+  }
+
   .logo {
     display: flex;
 
@@ -27,6 +35,28 @@
 
     p {
       color: #7b7b7b;
+    }
+
+    @media (max-width: 420px) {
+      img {
+        width: 26px;
+        height: 36px;
+      }
+
+      h1 {
+        font-size: 20px;
+        font-weight: 800;
+      }
+    }
+  }
+
+  .searchBar {
+    @media (max-width: 704px) {
+      order: 1;
+    }
+
+    @media (max-width: 450px) {
+      width: 100%;
     }
   }
 
@@ -55,7 +85,7 @@
   }
 
   .delimiter {
-    width: 1px;
+    width: 2px;
     height: 25px;
     background-color: rgba(255, 255, 255, 0.25);
     margin-left: 14px;

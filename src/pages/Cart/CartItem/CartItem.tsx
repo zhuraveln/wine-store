@@ -28,11 +28,12 @@ const CartItemWine: React.FC<CartItemProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const itemPlus = () => dispatch(addItem({ id } as CartItem));
+  const itemPlus = () => dispatch(addItem({ id, bottleType, bottleSize } as CartItem));
 
-  const itemMinus = () => dispatch(removeItem(id));
+  const itemMinus = () => dispatch(removeItem({ id, bottleType, bottleSize } as CartItem));
 
-  const removeAll = () => dispatch(removeAllItems({ id, price, count } as CartItem));
+  const removeAll = () =>
+    dispatch(removeAllItems({ id, bottleType, bottleSize, price, count } as CartItem));
 
   return (
     <div className={styles.item}>

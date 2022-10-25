@@ -55,8 +55,6 @@ const Shop: React.FC = () => {
   // In first mount don't fetch initialState in Redux (filterSlice) if client have URL data.
   // Next mount fetch initialState in Redux (filterSlice).
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     if (!isUrlSearch.current) {
       dispatch(fetchAllWine({ category, sortBy, search }));
     }
@@ -87,7 +85,7 @@ const Shop: React.FC = () => {
         <Sort value={sortBy} />
       </div>
 
-      {wine.length ? (
+      {wineStatus !== Status.ERROR ? (
         <h2 className={styles.title}>{category === 'Все' ? 'Все вина' : category}</h2>
       ) : (
         ''

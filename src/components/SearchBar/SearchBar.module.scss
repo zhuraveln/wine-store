@@ -1,22 +1,55 @@
 @import '/src/scss/variables.scss';
 
 .root {
+  // display: flex;
+
+  @media (max-width: 742px) {
+    // position: relative;
+    // right: 20px;
+  }
+
+  // @media (max-width: 450px) {
+  //   right: 0px;
+  // }
+
   .searchIcon {
     position: relative;
     left: 30px;
-    top: 3px;
+    top: 4px;
     height: 18px;
     width: 18px;
     opacity: 0.4;
+
+    // @media (max-width: 742px) {
+    //   left: 30px;
+    //   top: 44px;
+    // }
   }
 
   input {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 12px 38px;
-    width: 350px;
+    width: 400px;
     border-radius: 10px;
     font-size: 16px;
     transition: all 0.35s ease-in-out;
+
+    @media (max-width: 1100px) {
+      width: 300px;
+    }
+
+    @media (max-width: 950px) {
+      width: 230px;
+    }
+
+    @media (max-width: 704px) {
+      width: 250px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 450px) {
+      width: 100%;
+    }
 
     &:hover {
       border: 1px solid rgba(0, 0, 0, 0.25);
@@ -24,14 +57,20 @@
 
     &:focus {
       border: 1px solid rgba(0, 0, 0, 0.25);
-      width: 450px;
+    }
+
+    @media (min-width: 1200px) {
+      &:focus {
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        width: 450px;
+      }
     }
   }
 
   .deleteIcon {
     position: relative;
-    right: 30px;
-    top: 3px;
+    right: 35px;
+    top: 2.5px;
     height: 16px;
     width: 16px;
     opacity: 0.4;
@@ -47,5 +86,10 @@
         fill: black;
       }
     }
+
+    // @media (max-width: 742px) {
+    //   right: 35px;
+    //   top: 46px;
+    // }
   }
 }

@@ -24,12 +24,12 @@ const Header: React.FC = () => {
           />
           <div>
             <h1>Wine store</h1>
-            <p>Лучшее вино на побережье</p>
+            <p>Лучшее вино</p>
           </div>
         </div>
       </Link>
 
-      {pathname === '/' && <SearchBar />}
+      <div className={styles.searchBar}>{pathname === '/' && <SearchBar />}</div>
 
       <Link to="/cart" className={styles.buttonCart}>
         <span>{totalPrice} ₽</span>
