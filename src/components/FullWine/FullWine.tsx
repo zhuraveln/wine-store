@@ -9,6 +9,8 @@ import { CartItem } from '../../redux/cart/types';
 import { useAppDispatch } from '../../redux/store';
 import { fetchOneWine } from '../../redux/wine/asyncActions';
 import { wineSelector } from '../../redux/wine/selectors';
+import { Status } from '../../redux/wine/types';
+import SkeletonWineCard from '../WineCard/SkeletonWineCard';
 
 import styles from './FullWine.module.scss';
 
@@ -20,7 +22,7 @@ const FullWine: React.FC = () => {
   const { imageUrl, title, bottleTypes, bottleSizes, price } = selectWine;
   const { id } = useParams() as { id: string };
 
-  const [selectType, setSelectType] = useState('Пластиковая бутылка');
+  const [selectType, setSelectType] = useState('Стеклянная бутылка');
   const [selectSize, setSelectSize] = useState(1);
 
   const bottlePrice = selectType === 'Стеклянная бутылка' ? 250 : 0;
@@ -47,12 +49,12 @@ const FullWine: React.FC = () => {
 
   return (
     <>
-      {selectWineStatus === 'error' ? (
+      {selectWineStatus === Status.ERROR ? (
         <ShopError />
       ) : (
         <>
-          {selectWineStatus === 'loading' ? (
-            <p>Loading...</p>
+          {selectWineStatus === Status.LOADING ? (
+            [...new Array(1)].map((_, index) => <SkeletonWineCard key={index} />)
           ) : (
             <div className={styles.root}>
               <Link to="/" className={styles.buttonBack}>

@@ -17,11 +17,11 @@ export const wineSlice = createSlice({
   extraReducers: (builder) => {
     // For all wine
     builder.addCase(fetchAllWine.pending, (state) => {
-      state.wine = [];
       state.wineStatus = Status.LOADING;
     });
     builder.addCase(fetchAllWine.fulfilled, (state, action) => {
-      state.wine = action.payload;
+      state.wine = [...state.wine, ...action.payload];
+
       state.wineStatus = Status.SUCCESS;
     });
     builder.addCase(fetchAllWine.rejected, (state) => {

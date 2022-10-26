@@ -28,4 +28,5 @@ export type fetchAllWineParams = {
   category: string;
   sortBy: SortType;
   search: string;
+  currentPage: number;
 };

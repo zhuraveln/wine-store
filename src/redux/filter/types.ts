@@ -23,4 +23,5 @@ export interface filterSliceState {
   category: string;
   sortBy: SortType;
   search: string;
+  currentPage: number;
 }

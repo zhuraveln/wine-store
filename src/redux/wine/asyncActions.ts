@@ -5,9 +5,10 @@ import { fetchAllWineParams } from './types';
 export const fetchAllWine = createAsyncThunk(
   'wine/fetchAllWineStatus',
   async (params: fetchAllWineParams) => {
-    const { category, sortBy, search } = params;
+    const { category, sortBy, search, currentPage } = params;
 
-    const data = await WineAPI.getAllWine(category, sortBy, search);
+    const data = await WineAPI.getAllWine(category, sortBy, search, currentPage);
+
     return data;
   },
 );
