@@ -1,95 +1,71 @@
 @import '/src/scss/variables.scss';
 
 .root {
-  // display: flex;
+  width: 400px;
 
-  @media (max-width: 742px) {
-    // position: relative;
-    // right: 20px;
+  @media (max-width: 1100px) {
+    width: 300px;
   }
 
-  // @media (max-width: 450px) {
-  //   right: 0px;
-  // }
-
-  .searchIcon {
+  @media (max-width: 814px) {
     position: relative;
-    left: 30px;
-    top: 4px;
-    height: 18px;
-    width: 18px;
-    opacity: 0.4;
-
-    // @media (max-width: 742px) {
-    //   left: 30px;
-    //   top: 44px;
-    // }
+    right: 18px;
+    width: 400px;
   }
 
-  input {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 12px 38px;
-    width: 400px;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: all 0.35s ease-in-out;
+  @media (max-width: 500px) {
+    width: 108%;
+  }
 
-    @media (max-width: 1100px) {
-      width: 300px;
-    }
+  .inputBar {
+    display: flex;
 
-    @media (max-width: 950px) {
-      width: 230px;
-    }
+    input {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 12px 38px;
 
-    @media (max-width: 704px) {
-      width: 250px;
-      margin-top: 30px;
-    }
-
-    @media (max-width: 450px) {
       width: 100%;
-    }
+      border-radius: 10px;
+      font-size: 16px;
+      transition: all 0.35s ease-in-out;
 
-    &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.25);
-    }
+      &:hover {
+        border: 1px solid rgba(0, 0, 0, 0.25);
+      }
 
-    &:focus {
-      border: 1px solid rgba(0, 0, 0, 0.25);
-    }
-
-    @media (min-width: 1200px) {
       &:focus {
         border: 1px solid rgba(0, 0, 0, 0.25);
-        width: 450px;
       }
     }
-  }
 
-  .deleteIcon {
-    position: relative;
-    right: 35px;
-    top: 2.5px;
-    height: 16px;
-    width: 16px;
-    opacity: 0.4;
-    transform: rotate(45deg);
-
-    path {
-      fill: rgb(153, 153, 153);
-      transition: all $duration ease-in-out;
+    .searchIcon {
+      position: relative;
+      left: 28px;
+      top: 14px;
+      height: 18px;
+      width: 18px;
+      opacity: 0.4;
     }
 
-    &:hover {
+    .deleteIcon {
+      position: relative;
+      right: 30px;
+      top: 15px;
+      height: 16px;
+      width: 16px;
+      opacity: 0.4;
+      transform: rotate(45deg);
+
       path {
-        fill: black;
+        fill: rgb(153, 153, 153);
+        transition: all $duration ease-in-out;
+      }
+
+      &:hover {
+        path {
+          fill: black;
+        }
       }
     }
-
-    // @media (max-width: 742px) {
-    //   right: 35px;
-    //   top: 46px;
-    // }
   }
 }

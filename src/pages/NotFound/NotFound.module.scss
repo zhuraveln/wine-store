@@ -3,9 +3,9 @@
 .empty {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  width: 560px;
+  align-items: center;
   text-align: center;
+  margin-bottom: 25px;
 
   h2 {
     font-size: 32px;
@@ -20,14 +20,12 @@
   }
 
   img {
-    display: block;
-    width: 200px;
-    margin: 45px auto 60px;
+    width: 300px;
+    margin: 30px 0;
   }
 
   .buttonBack {
     display: flex;
-    align-self: center;
     justify-content: center;
     width: 230px;
     min-width: 100px;
@@ -50,13 +48,18 @@
 
     span {
       color: #fff;
-      font-size: 20px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     &:hover {
       background-color: darken($orange, 8%);
       border-color: darken($orange, 8%);
+    }
+  }
+
+  @media (max-width: 500px) {
+    img {
+      width: 200px;
     }
   }
 }

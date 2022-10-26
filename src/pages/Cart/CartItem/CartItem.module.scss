@@ -3,18 +3,31 @@
 .item {
   display: flex;
   width: 100%;
-  border-top: 1px solid $gray-line;
+  border-top: 1.5px solid $gray-line;
   padding-top: 30px;
   margin-top: 15px;
 
   a {
     color: black;
   }
+
+  @media (max-width: 750px) {
+    flex-wrap: wrap;
+  }
 }
 
 .imgInfo {
   display: flex;
   margin-right: 20px;
+
+  @media (max-width: 1250px) {
+    margin-right: 0px;
+  }
+
+  @media (max-width: 750px) {
+    position: relative;
+    right: 25px;
+  }
 
   .imgWine {
     width: 110px;
@@ -38,100 +51,118 @@
       font-size: 18px;
       color: #8d8d8d;
     }
+
+    b {
+      margin-top: 2px;
+      color: #616161;
+    }
   }
 }
 
-.count {
+.countPriceRemove {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 15%;
+  width: 100%;
 
-  b {
-    font-size: 22px;
+  @media (max-width: 750px) {
+    margin-top: 20px;
+    justify-content: center;
   }
 
-  .buttonCount {
+  .count {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    width: 32px;
-    height: 32px;
-    border-radius: 30px;
-    border: 2px solid $orange;
-    cursor: pointer;
-    transition: background-color $duration ease-in-out;
+    justify-content: space-between;
+    width: 111px;
 
-    &:hover {
-      background-color: $orange;
-
-      svg path {
-        fill: #fff;
-      }
+    b {
+      font-size: 22px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
-    &:disabled {
-      opacity: 0.3;
-      background-color: #ffffff;
-      border-color: #787878;
-
-      svg path {
-        fill: #787878;
-      }
+    .buttonCount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 30px;
+      border: 2px solid $orange;
+      cursor: pointer;
+      transition: background-color $duration ease-in-out;
 
       &:hover {
+        background-color: $orange;
+
         svg path {
-          border-color: #787878;
+          fill: #fff;
+        }
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        background-color: #ffffff;
+        border-color: #787878;
+
+        svg path {
+          fill: #787878;
+        }
+
+        &:hover {
+          svg path {
+            border-color: #787878;
+          }
         }
       }
     }
   }
-}
 
-.price {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 33%;
-
-  b {
-    font-weight: bold;
-    font-size: 22px;
-    letter-spacing: 0.01em;
-  }
-}
-
-.remove {
-  display: flex;
-  align-items: center;
-
-  .buttonRemove {
+  .price {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid $orange;
-    border-color: darken($color: $gray-line, $amount: 10);
-    width: 32px;
-    height: 32px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+    width: 33%;
 
-    svg {
-      transform: rotate(45deg);
-
-      path {
-        fill: darken($color: $gray-line, $amount: 15);
-      }
+    b {
+      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 0.01em;
     }
+  }
 
-    &:hover {
-      border-color: darken($color: $gray-line, $amount: 80);
-      background-color: darken($color: $gray-line, $amount: 80);
+  .remove {
+    display: flex;
+    align-items: center;
 
-      svg path {
-        fill: #fff;
+    .buttonRemove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid $orange;
+      border-color: darken($color: $gray-line, $amount: 10);
+      width: 32px;
+      height: 32px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+
+      svg {
+        transform: rotate(45deg);
+
+        path {
+          fill: darken($color: $gray-line, $amount: 15);
+        }
+      }
+
+      &:hover {
+        border-color: darken($color: $gray-line, $amount: 80);
+        background-color: darken($color: $gray-line, $amount: 80);
+
+        svg path {
+          fill: #fff;
+        }
       }
     }
   }

@@ -5,6 +5,22 @@
   flex-direction: column;
   width: 65%;
   align-self: center;
+
+  @media (max-width: 1150px) {
+    width: 85%;
+  }
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
+
+  @media (max-width: 814px) {
+    margin-top: 30px;
+  }
+
+  @media (max-width: 500px) {
+    margin-top: 0px;
+  }
 }
 
 .top {
@@ -22,6 +38,16 @@
     width: 35px;
     height: 35px;
     margin-right: 10px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 18px;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+    }
   }
 }
 
@@ -51,6 +77,17 @@
       opacity: 1;
     }
   }
+
+  @media (max-width: 500px) {
+    p {
+      font-size: 16px;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 }
 
 .bottom {
@@ -60,8 +97,20 @@
     display: flex;
     justify-content: space-between;
 
+    @media (max-width: 561px) {
+      flex-wrap: wrap;
+    }
+
     p {
       font-size: 22px;
+
+      &:first-of-type {
+        margin-right: 15px;
+
+        @media (max-width: 561px) {
+          margin-bottom: 6px;
+        }
+      }
 
       &:last-of-type {
         b {
@@ -79,10 +128,9 @@
     .buttonBack {
       display: flex;
       align-items: center;
-      width: 200px;
-      min-width: 100px;
-      border-radius: 30px;
       padding: 15px 20px;
+      margin-right: 10px;
+      border-radius: 30px;
       border: 1px solid darken($color: $gray-line, $amount: 10);
       cursor: pointer;
       transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
@@ -100,6 +148,11 @@
       span {
         color: darken($color: $gray-line, $amount: 20);
         font-weight: 600;
+        text-align: center;
+
+        @media (max-width: 561px) {
+          display: none;
+        }
       }
 
       &:hover {
@@ -121,10 +174,8 @@
     .buttonPay {
       display: flex;
       justify-content: center;
-      width: 200px;
-      min-width: 100px;
       border-radius: 30px;
-      padding: 15px 20px;
+      padding: 15px 30px;
       background-color: $orange;
       cursor: pointer;
       transition: background-color $duration ease-in-out;
@@ -132,6 +183,7 @@
       span {
         color: #fff;
         font-weight: 600;
+        text-align: center;
       }
 
       &:hover {

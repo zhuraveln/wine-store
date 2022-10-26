@@ -34,6 +34,11 @@ body {
     margin: 15px auto;
     width: calc(100vw - 30px);
   }
+
+  @media (max-width: 450px) {
+    margin: 10px auto;
+    width: calc(100vw - 20px);
+  }
 }
 
 .content {
@@ -43,7 +48,7 @@ body {
   padding: 30px 0;
   margin: auto;
 
-  @media (max-width: 742px) {
+  @media (max-width: 814px) {
     padding: 0;
   }
 }
