@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../redux/store';
 import { fetchOneWine } from '../../redux/wine/asyncActions';
 import { wineSelector } from '../../redux/wine/selectors';
 import { Status } from '../../redux/wine/types';
-import SkeletonWineCard from '../WineCard/SkeletonWineCard';
+import SkeletonWineCard from '../WineCard/SkeletonWineCard/SkeletonWineCard';
 
 import styles from './FullWine.module.scss';
 

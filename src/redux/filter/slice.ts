@@ -7,6 +7,7 @@ export const initialState: filterSliceState = {
   sortBy: { name: 'популярные', sortProperty: SortPropertyEnum.RATING_DESCENDING },
   search: '',
   currentPage: 1,
+  fetchLimit: 1,
 };
 
 export const filterSlice = createSlice({
@@ -31,12 +32,16 @@ export const filterSlice = createSlice({
       state.search = action.payload.search;
       state.currentPage = 1;
     },
-    setCurrentPage(state) {
+    setNextPage(state) {
       state.currentPage = state.currentPage + 1;
+    },
+    setFetchLimit(state, action: PayloadAction<number>) {
+      state.fetchLimit = action.payload;
     },
   },
 });
 
-export const { setCategory, setSort, setSearch, setFilters, setCurrentPage } = filterSlice.actions;
+export const { setCategory, setSort, setSearch, setFilters, setNextPage, setFetchLimit } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;

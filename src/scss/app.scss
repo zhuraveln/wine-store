@@ -18,17 +18,12 @@ body {
 }
 
 .wrapper {
-  width: calc(100vw - 110px);
+  width: calc(100vw - 50px);
   height: 100%;
   background-color: #fff;
-  margin: 50px auto;
+  margin: 25px auto;
   border-radius: 10px;
   max-width: 1400px;
-
-  @media (max-width: 1000px) {
-    margin: 25px auto;
-    width: calc(100vw - 50px);
-  }
 
   @media (max-width: 600px) {
     margin: 15px auto;

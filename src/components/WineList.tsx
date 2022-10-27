@@ -1,5 +1,6 @@
 import React from 'react';
 import { WineItem } from '../redux/wine/types';
+import SkeletonWineCard from './WineCard/SkeletonWineCard/SkeletonWineCard';
 
 import WineCard from './WineCard/WineCard';
 

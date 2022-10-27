@@ -22,6 +22,7 @@ export interface WineSliceState {
   wineStatus: Status;
   selectWine: WineItem;
   selectWineStatus: Status;
+  countWineItem: number;
 }
 
 export type fetchAllWineParams = {
@@ -29,4 +30,5 @@ export type fetchAllWineParams = {
   sortBy: SortType;
   search: string;
   currentPage: number;
+  limitWineFeching?: number;
 };

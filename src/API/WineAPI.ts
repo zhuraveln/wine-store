@@ -4,7 +4,13 @@ import { WineItem } from '../redux/wine/types';
 
 export default class WineAPI {
   // Get All Wine from server
-  static async getAllWine(category: string, sortBy: SortType, search: string, currentPage: number) {
+  static async getAllWine(
+    category: string,
+    sortBy: SortType,
+    search: string,
+    currentPage: number,
+    limitWineFeching?: number,
+  ) {
     const categoryType = category !== 'Все' ? `category=${category}` : '';
 
     const sortType = sortBy.sortProperty.replace('-', '');
@@ -14,7 +20,11 @@ export default class WineAPI {
       // `${process.env.REACT_APP_API_URL}?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${search}` ||
       // `http://localhost:${process.env.REACT_APP_PORT}/`
       // ||
-      `${process.env.REACT_APP_MOCK_API}?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${search}&page=${currentPage}&limit=4`,
+      `${
+        process.env.REACT_APP_MOCK_API
+      }?${categoryType}&sortBy=${sortType}&order=${orderType}&search=${search}&page=${currentPage}&limit=${
+        limitWineFeching ? limitWineFeching : ''
+      }`,
     );
 
     return response.data;

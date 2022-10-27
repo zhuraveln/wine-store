@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import Categories from '../../components/Categories/Categories';
 import Sort from '../../components/Sort/Sort';
-import SkeletonWineCard from '../../components/WineCard/SkeletonWineCard';
+import SkeletonWineCard from '../../components/WineCard/SkeletonWineCard/SkeletonWineCard';
 import WineList from '../../components/WineList';
 import ShopError from './ShopError/ShopError';
 
@@ -15,8 +15,8 @@ import { useAppDispatch } from '../../redux/store';
 import { wineSelector } from '../../redux/wine/selectors';
 import { filterSelector } from '../../redux/filter/selectors';
 import { filterSliceState, sortTypes } from '../../redux/filter/types';
-import { setCurrentPage, setFilters } from '../../redux/filter/slice';
-import { fetchAllWine } from '../../redux/wine/asyncActions';
+import { setNextPage, setFetchLimit, setFilters } from '../../redux/filter/slice';
+import { fetchAllWine, fetchAllWineCalc } from '../../redux/wine/asyncActions';
 import { Status } from '../../redux/wine/types';
 import NotFoundWine from './NotFoundWine/NotFoundWine';
 import { removeAllWine } from '../../redux/wine/slice';
@@ -28,11 +28,17 @@ const Shop: React.FC = () => {
   const isUrlSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { wine, wineStatus } = useSelector(wineSelector);
+  const { wine, wineStatus, countWineItem } = useSelector(wineSelector);
 
-  const { category, sortBy, search, currentPage } = useSelector(filterSelector);
+  const { category, sortBy, search, currentPage, fetchLimit } = useSelector(filterSelector);
 
   const [fetching, setFetching] = useState(false);
+
+  const limitWineFeching = 8;
+
+  const caltPageFeching = (count: number, limit: number) => {
+    return Math.ceil(count / limit);
+  };
 
   // First mount. If search bar have a URL data - save it in Redux (filterSlice).
   // If client haven't URL data - does nothing.
@@ -60,8 +66,9 @@ const Shop: React.FC = () => {
   // Next mount fetch initialState in Redux (filterSlice).
   useEffect(() => {
     if (!isUrlSearch.current) {
-      dispatch(fetchAllWine({ category, sortBy, search, currentPage }));
-      dispatch(setCurrentPage());
+      dispatch(fetchAllWineCalc({ category, sortBy, search, currentPage }));
+      dispatch(fetchAllWine({ category, sortBy, search, currentPage, limitWineFeching }));
+      dispatch(setNextPage());
     }
 
     isUrlSearch.current = false;
@@ -84,17 +91,21 @@ const Shop: React.FC = () => {
   }, [category, sortBy, search]);
 
   useEffect(() => {
-    if (fetching && currentPage <= 6) {
-      dispatch(fetchAllWine({ category, sortBy, search, currentPage }));
-      dispatch(setCurrentPage());
+    console.log(fetchLimit, 'effectScroll');
+    dispatch(setFetchLimit(caltPageFeching(countWineItem, limitWineFeching)));
+
+    if (fetching && currentPage <= fetchLimit) {
+      dispatch(fetchAllWine({ category, sortBy, search, currentPage, limitWineFeching }));
+      dispatch(setNextPage());
     }
-  }, [fetching]);
+  }, [fetching, fetchLimit]);
 
   const scrollHandler = (e: any) => {
+    //TODO
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
-      150
+      500
     ) {
       setFetching(true);
     } else {
@@ -127,7 +138,7 @@ const Shop: React.FC = () => {
         <ShopError />
       ) : (
         <div className={styles.items}>
-          {wineStatus === Status.LOADING ? (
+          {!wine.length ? (
             [...new Array(8)].map((_, index) => <SkeletonWineCard key={index} />)
           ) : wine.length ? (
             <WineList wine={wine} />

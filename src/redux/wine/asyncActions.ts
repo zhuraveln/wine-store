@@ -5,11 +5,22 @@ import { fetchAllWineParams } from './types';
 export const fetchAllWine = createAsyncThunk(
   'wine/fetchAllWineStatus',
   async (params: fetchAllWineParams) => {
+    const { category, sortBy, search, currentPage, limitWineFeching } = params;
+
+    const data = await WineAPI.getAllWine(category, sortBy, search, currentPage, limitWineFeching);
+
+    return data;
+  },
+);
+
+export const fetchAllWineCalc = createAsyncThunk(
+  'wine/fetchAllWineCalcStatus',
+  async (params: fetchAllWineParams) => {
     const { category, sortBy, search, currentPage } = params;
 
     const data = await WineAPI.getAllWine(category, sortBy, search, currentPage);
 
-    return data;
+    return data.length;
   },
 );
 

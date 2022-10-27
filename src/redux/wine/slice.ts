@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllWine, fetchOneWine } from './asyncActions';
+import { fetchAllWine, fetchAllWineCalc, fetchOneWine } from './asyncActions';
 import { Status, WineItem, WineSliceState } from './types';
 
 const initialState: WineSliceState = {
@@ -8,6 +8,8 @@ const initialState: WineSliceState = {
 
   selectWine: {} as WineItem,
   selectWineStatus: Status.LOADING,
+
+  countWineItem: 8,
 };
 
 export const wineSlice = createSlice({
@@ -31,6 +33,11 @@ export const wineSlice = createSlice({
     builder.addCase(fetchAllWine.rejected, (state) => {
       state.wine = [];
       state.wineStatus = Status.ERROR;
+    });
+
+    // For all wine Calculation count of item (bicicle)
+    builder.addCase(fetchAllWineCalc.fulfilled, (state, action) => {
+      state.countWineItem = action.payload;
     });
 
     // For one wine
