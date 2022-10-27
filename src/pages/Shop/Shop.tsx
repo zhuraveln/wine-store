@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Categories from '../../components/Categories/Categories';
 import Sort from '../../components/Sort/Sort';
@@ -19,6 +19,7 @@ import { setCurrentPage, setFilters } from '../../redux/filter/slice';
 import { fetchAllWine } from '../../redux/wine/asyncActions';
 import { Status } from '../../redux/wine/types';
 import NotFoundWine from './NotFoundWine/NotFoundWine';
+import { removeAllWine } from '../../redux/wine/slice';
 
 const Shop: React.FC = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const Shop: React.FC = () => {
 
       const sort = sortTypes.find((obj) => obj.sortProperty === (params.sortBy as unknown));
 
+      dispatch(removeAllWine());
       dispatch(
         setFilters({
           ...params,

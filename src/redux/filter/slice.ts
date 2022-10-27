@@ -15,17 +15,21 @@ export const filterSlice = createSlice({
   reducers: {
     setCategory(state, action: PayloadAction<string>) {
       state.category = action.payload;
+      state.currentPage = 1;
     },
     setSort(state, action: PayloadAction<SortType>) {
       state.sortBy = action.payload;
+      state.currentPage = 1;
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
+      state.currentPage = 1;
     },
     setFilters(state, action: PayloadAction<filterSliceState>) {
       state.category = action.payload.category;
       state.sortBy = action.payload.sortBy;
       state.search = action.payload.search;
+      state.currentPage = 1;
     },
     setCurrentPage(state) {
       state.currentPage = state.currentPage + 1;

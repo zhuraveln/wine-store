@@ -6,6 +6,7 @@ import styles from './SearchBar.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearch } from '../../redux/filter/slice';
 import { filterSelector } from '../../redux/filter/selectors';
+import { removeAllWine } from '../../redux/wine/slice';
 
 const SearchBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const SearchBar: React.FC = () => {
   const [viewValue, setViewValue] = useState('');
 
   const onClickClear = () => {
+    dispatch(removeAllWine());
     dispatch(setSearch(''));
     setViewValue('');
     inputRef.current?.focus();
@@ -23,6 +25,7 @@ const SearchBar: React.FC = () => {
 
   const updateSearchValue = useCallback(
     debounce((value) => {
+      dispatch(removeAllWine());
       dispatch(setSearch(value));
     }, 500),
     [],

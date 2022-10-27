@@ -13,7 +13,11 @@ const initialState: WineSliceState = {
 export const wineSlice = createSlice({
   name: 'wine',
   initialState,
-  reducers: {},
+  reducers: {
+    removeAllWine(state) {
+      state.wine = [];
+    },
+  },
   extraReducers: (builder) => {
     // For all wine
     builder.addCase(fetchAllWine.pending, (state) => {
@@ -44,5 +48,7 @@ export const wineSlice = createSlice({
     });
   },
 });
+
+export const { removeAllWine } = wineSlice.actions;
 
 export default wineSlice.reducer;

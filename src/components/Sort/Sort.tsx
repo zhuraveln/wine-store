@@ -2,6 +2,7 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSort } from '../../redux/filter/slice';
 import { SortType, sortTypes } from '../../redux/filter/types';
+import { removeAllWine } from '../../redux/wine/slice';
 
 import styles from './Sort.module.scss';
 
@@ -18,6 +19,7 @@ const Sort: React.FC<SortProps> = memo(({ value }) => {
   const [open, setOpen] = useState(false);
 
   const changeSort = (sortType: SortType) => {
+    dispatch(removeAllWine());
     dispatch(setSort(sortType));
   };
 
