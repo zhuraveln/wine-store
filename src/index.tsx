@@ -1,16 +1,16 @@
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import App from './App';
+import App from './App'
 
-import { persistor, store } from './redux/store';
+import { persistor, store } from './redux/store'
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('root')
 
 if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
+  const root = ReactDOM.createRoot(rootElement)
 
   root.render(
     <BrowserRouter>
@@ -19,6 +19,6 @@ if (rootElement) {
           <App />
         </PersistGate>
       </Provider>
-    </BrowserRouter>,
-  );
+    </BrowserRouter>
+  )
 }

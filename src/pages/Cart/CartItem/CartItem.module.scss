@@ -146,7 +146,8 @@
       height: 32px;
       border-radius: 30px;
       cursor: pointer;
-      transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+      transition: background-color $duration ease-in-out,
+        border-color $duration ease-in-out;
 
       svg {
         transform: rotate(45deg);

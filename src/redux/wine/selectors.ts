@@ -1,3 +1,3 @@
-import { RootState } from '../store';
+import { RootState } from '../store'
 
-export const wineSelector = (state: RootState) => state.wine;
+export const wineSelector = (state: RootState) => state.wine

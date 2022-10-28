@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllWine, fetchAllWineCalc, fetchOneWine } from './asyncActions';
-import { Status, WineItem, WineSliceState } from './types';
+import { createSlice } from '@reduxjs/toolkit'
+import { fetchAllWine, fetchAllWineCalc, fetchOneWine } from './asyncActions'
+import { Status, WineItem, WineSliceState } from './types'
 
 const initialState: WineSliceState = {
   wine: [] as WineItem[],
@@ -9,53 +9,53 @@ const initialState: WineSliceState = {
   selectWine: {} as WineItem,
   selectWineStatus: Status.LOADING,
 
-  countWineItem: 8,
-};
+  countWineItem: 8
+}
 
 export const wineSlice = createSlice({
   name: 'wine',
   initialState,
   reducers: {
     removeAllWine(state) {
-      state.wine = [];
-    },
+      state.wine = []
+    }
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     // For all wine
-    builder.addCase(fetchAllWine.pending, (state) => {
-      state.wineStatus = Status.LOADING;
-    });
+    builder.addCase(fetchAllWine.pending, state => {
+      state.wineStatus = Status.LOADING
+    })
     builder.addCase(fetchAllWine.fulfilled, (state, action) => {
-      state.wine = [...state.wine, ...action.payload];
+      state.wine = [...state.wine, ...action.payload]
 
-      state.wineStatus = Status.SUCCESS;
-    });
-    builder.addCase(fetchAllWine.rejected, (state) => {
-      state.wine = [];
-      state.wineStatus = Status.ERROR;
-    });
+      state.wineStatus = Status.SUCCESS
+    })
+    builder.addCase(fetchAllWine.rejected, state => {
+      state.wine = []
+      state.wineStatus = Status.ERROR
+    })
 
     // For all wine Calculation count of item (bicicle)
     builder.addCase(fetchAllWineCalc.fulfilled, (state, action) => {
-      state.countWineItem = action.payload;
-    });
+      state.countWineItem = action.payload
+    })
 
     // For one wine
-    builder.addCase(fetchOneWine.pending, (state) => {
-      state.selectWine = {} as WineItem;
-      state.selectWineStatus = Status.LOADING;
-    });
+    builder.addCase(fetchOneWine.pending, state => {
+      state.selectWine = {} as WineItem
+      state.selectWineStatus = Status.LOADING
+    })
     builder.addCase(fetchOneWine.fulfilled, (state, action) => {
-      state.selectWine = action.payload;
-      state.selectWineStatus = Status.SUCCESS;
-    });
-    builder.addCase(fetchOneWine.rejected, (state) => {
-      state.selectWine = {} as WineItem;
-      state.selectWineStatus = Status.ERROR;
-    });
-  },
-});
+      state.selectWine = action.payload
+      state.selectWineStatus = Status.SUCCESS
+    })
+    builder.addCase(fetchOneWine.rejected, state => {
+      state.selectWine = {} as WineItem
+      state.selectWineStatus = Status.ERROR
+    })
+  }
+})
 
-export const { removeAllWine } = wineSlice.actions;
+export const { removeAllWine } = wineSlice.actions
 
-export default wineSlice.reducer;
+export default wineSlice.reducer

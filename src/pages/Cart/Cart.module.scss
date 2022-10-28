@@ -133,7 +133,8 @@
       border-radius: 30px;
       border: 1px solid darken($color: $gray-line, $amount: 10);
       cursor: pointer;
-      transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+      transition: background-color $duration ease-in-out,
+        border-color $duration ease-in-out;
 
       svg {
         height: 16px;
