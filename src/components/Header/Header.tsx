@@ -33,6 +33,18 @@ const Header: React.FC = () => {
         {pathname === '/' && <SearchBar />}
       </div>
 
+      <div className={styles.buttonCart}>
+        <Link to='/auth/sign-in'>
+          <span>Войти</span>
+        </Link>
+
+        <div className={styles.delimiter}></div>
+
+        <Link to='/auth/sign-up'>
+          <span>Регистрация</span>
+        </Link>
+      </div>
+
       <Link to='/cart' className={styles.buttonCart}>
         <span>{totalPrice} ₽</span>
         <div className={styles.delimiter}></div>

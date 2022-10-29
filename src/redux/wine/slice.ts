@@ -35,7 +35,7 @@ export const wineSlice = createSlice({
       state.wineStatus = Status.ERROR
     })
 
-    // For all wine Calculation count of item (bicicle)
+    // For all wine Calculation count of item (bicycle)
     builder.addCase(fetchAllWineCalc.fulfilled, (state, action) => {
       state.countWineItem = action.payload
     })

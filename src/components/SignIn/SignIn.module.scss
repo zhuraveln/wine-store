@@ -1,0 +1,51 @@
+@import '/src/scss/variables.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  background-color: #f3f3f3;
+  border: 2px solid #c5c5c5;
+  border-radius: 7px;
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 15%);
+
+  p {
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  input {
+    padding: 14px;
+    margin-bottom: 4px;
+    border: 1px solid #f3f3f3;
+    border-radius: 7px;
+    background-color: rgb(255, 255, 255);
+    font-size: 16px;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+    transition: border-color $duration ease-in-out;
+
+    &:hover,
+    &:focus {
+      border-color: #c5c5c5;
+    }
+  }
+
+  button {
+    padding: 10px;
+    border: 1px solid $orange;
+    border-radius: 7px;
+    background-color: $orange;
+    color: white;
+    font-size: 17px;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+    transition: background-color $duration ease-in-out;
+
+    &:hover,
+    &:active {
+      background-color: darken($orange, 8%);
+    }
+  }
+}
