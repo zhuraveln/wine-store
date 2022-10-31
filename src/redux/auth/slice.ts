@@ -14,6 +14,7 @@ export const authSlice = createSlice({
   reducers: {
     logOut(state) {
       state.userData = null
+      state.status = Status.LOADING
     }
   },
   extraReducers: builder => {
@@ -22,8 +23,7 @@ export const authSlice = createSlice({
       state.status = Status.LOADING
     })
     builder.addCase(signUp.fulfilled, (state, action) => {
-      const { _id, name, token } = action.payload
-      state.userData = { _id, name, token }
+      state.userData = action.payload
       state.status = Status.SUCCESS
     })
     builder.addCase(signUp.rejected, state => {
@@ -35,8 +35,7 @@ export const authSlice = createSlice({
       state.status = Status.LOADING
     })
     builder.addCase(signIn.fulfilled, (state, action) => {
-      const { _id, name, token } = action.payload
-      state.userData = { _id, name, token }
+      state.userData = action.payload
       state.status = Status.SUCCESS
     })
     builder.addCase(signIn.rejected, state => {

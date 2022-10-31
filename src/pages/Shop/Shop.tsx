@@ -19,13 +19,16 @@ import { filterSliceState, sortTypes } from '../../redux/filter/types'
 import {
   setNextPage,
   setFetchLimit,
-  setFilters
+  setFilters,
+  setDefaultPage
 } from '../../redux/filter/slice'
 import { fetchAllWine, fetchAllWineCalc } from '../../redux/wine/asyncActions'
 import { Status } from '../../redux/wine/types'
 import NotFoundWine from './NotFoundWine/NotFoundWine'
 import { removeAllWine } from '../../redux/wine/slice'
 import { caltPageFetching } from '../../utils/caltPageFetching'
+import { getCart } from '../../redux/cart/asyncActions'
+import { userDataSelector } from '../../redux/auth/selectors'
 
 const Shop: React.FC = () => {
   const navigate = useNavigate()
@@ -35,6 +38,7 @@ const Shop: React.FC = () => {
   const isMounted = useRef(false)
 
   const { wine, wineStatus, countWineItem } = useSelector(wineSelector)
+  const userData = useSelector(userDataSelector)
 
   const {
     category,
@@ -87,7 +91,11 @@ const Shop: React.FC = () => {
           limitWineFeching
         })
       )
+      dispatch(setDefaultPage())
       dispatch(setNextPage())
+      if (userData) {
+        dispatch(getCart(userData.cart))
+      }
     }
 
     isUrlSearch.current = false

@@ -12,3 +12,9 @@ export interface CartSliceState {
   items: CartItem[]
   totalPrice: number
 }
+
+export type UploadCartParams = {
+  cart: string
+  items: CartItem[]
+  totalPrice: number
+}

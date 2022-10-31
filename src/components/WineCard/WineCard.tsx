@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { userDataSelector } from '../../redux/auth/selectors'
+import { uploadCart } from '../../redux/cart/asyncActions'
 import { cartItemSelector } from '../../redux/cart/selectors'
 import { addItem } from '../../redux/cart/slice'
 import { CartItem } from '../../redux/cart/types'
@@ -25,6 +27,8 @@ const WineCard: React.FC<WineItem> = ({
     cartItemSelector(id, bottleTypes[selectType], bottleSizes[selectSize])
   )
 
+  const userData = useSelector(userDataSelector)
+
   const onClickAdd = (): void => {
     const item: CartItem = {
       id,
@@ -35,8 +39,11 @@ const WineCard: React.FC<WineItem> = ({
       price,
       count: 0 // TODO
     }
-
     dispatch(addItem(item))
+
+    if (userData) {
+      // dispatch(uploadCart(userData.cart, item, totalPrice: price))
+    }
   }
 
   return (

@@ -4,6 +4,7 @@ export type Data = {
   _id: string
   name: string
   token: string
+  cart: string
 }
 
 export interface AuthSliceState {

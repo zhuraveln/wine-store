@@ -9,7 +9,6 @@ import { useAppDispatch } from '../../redux/store'
 
 import styles from './SignIn.module.scss'
 import { IUserFields } from './types'
-import { setDefaultPage } from '../../redux/filter/slice'
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -30,12 +29,10 @@ const SignUp: React.FC = () => {
 
   const onSubmit: SubmitHandler<IUserFields> = data => {
     dispatch(signIn(data))
-    dispatch(setDefaultPage())
     reset()
   }
 
   if (isAuth) {
-    dispatch(setDefaultPage())
     return <Navigate to='/' />
   }
 

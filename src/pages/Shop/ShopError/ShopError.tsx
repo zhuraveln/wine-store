@@ -10,6 +10,7 @@ const ShopError: React.FC = () => {
 
   const onClickRestart = () => {
     dispatch(setSearch(''))
+    window.location.reload()
   }
 
   return (
