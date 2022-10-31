@@ -1,7 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
+import { isAuthSelector } from '../../redux/auth/selectors'
+import { logOut } from '../../redux/auth/slice'
 import { cartSelector } from '../../redux/cart/selectors'
+import { useAppDispatch } from '../../redux/store'
 
 import SearchBar from '../SearchBar/SearchBar'
 
@@ -9,19 +12,22 @@ import styles from './Header.module.scss'
 
 const Header: React.FC = () => {
   const { pathname } = useLocation()
+  const dispatch = useAppDispatch()
 
+  const isAuth = useSelector(isAuthSelector)
   const { items, totalPrice } = useSelector(cartSelector)
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+
+  const onClickLogOut = () => {
+    dispatch(logOut())
+  }
 
   return (
     <div className={styles.root}>
       <Link to='/'>
         <div className={styles.logo}>
-          <img
-            src='https://drive.google.com/thumbnail?id=1NW-DfPS1zHw3HDvm5apz7m7CpheY8q-3'
-            alt='Wine logo'
-          />
+          <img src='/img/logo.png' alt='Wine logo' />
           <div>
             <h1>Wine store</h1>
             <p>Лучшее вино</p>
@@ -33,17 +39,23 @@ const Header: React.FC = () => {
         {pathname === '/' && <SearchBar />}
       </div>
 
-      <div className={styles.buttonCart}>
-        <Link to='/auth/sign-in'>
-          <span>Войти</span>
-        </Link>
+      {!isAuth ? (
+        <div className={styles.buttonCart}>
+          <Link to='/auth/sign-in'>
+            <span>Войти</span>
+          </Link>
 
-        <div className={styles.delimiter}></div>
+          <div className={styles.delimiter}></div>
 
-        <Link to='/auth/sign-up'>
-          <span>Регистрация</span>
-        </Link>
-      </div>
+          <Link to='/auth/sign-up'>
+            <span>Регистрация</span>
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.buttonCart}>
+          <span onClick={onClickLogOut}>Выйти</span>
+        </div>
+      )}
 
       <Link to='/cart' className={styles.buttonCart}>
         <span>{totalPrice} ₽</span>

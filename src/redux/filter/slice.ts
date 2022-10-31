@@ -44,6 +44,9 @@ export const filterSlice = createSlice({
     setNextPage(state) {
       state.currentPage = state.currentPage + 1
     },
+    setDefaultPage(state) {
+      state.currentPage = 1
+    },
     setFetchLimit(state, action: PayloadAction<number>) {
       state.fetchLimit = action.payload
     }
@@ -56,7 +59,8 @@ export const {
   setSearch,
   setFilters,
   setNextPage,
-  setFetchLimit
+  setFetchLimit,
+  setDefaultPage
 } = filterSlice.actions
 
 export default filterSlice.reducer

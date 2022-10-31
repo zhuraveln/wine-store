@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import filter from './filter/slice'
 import cart from './cart/slice'
 import wine from './wine/slice'
+import auth from './auth/slice'
 import { useDispatch } from 'react-redux'
 
 import {
@@ -19,13 +20,14 @@ import storage from 'redux-persist/lib/storage'
 const rootReducer = combineReducers({
   filter,
   cart,
-  wine
+  wine,
+  auth
 })
 
 const persistConfig = {
   key: 'WineStore',
   storage,
-  whitelist: ['cart']
+  whitelist: ['cart', 'auth']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
