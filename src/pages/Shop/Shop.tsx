@@ -26,7 +26,7 @@ import { fetchAllWine, fetchAllWineCalc } from '../../redux/wine/asyncActions'
 import { Status } from '../../redux/wine/types'
 import NotFoundWine from './NotFoundWine/NotFoundWine'
 import { removeAllWine } from '../../redux/wine/slice'
-import { caltPageFetching } from '../../utils/caltPageFetching'
+import { calcPageFetching } from '../../utils/calcPageFetching'
 import { getCart } from '../../redux/cart/asyncActions'
 import { userDataSelector } from '../../redux/auth/selectors'
 
@@ -93,6 +93,7 @@ const Shop: React.FC = () => {
       )
       dispatch(setDefaultPage())
       dispatch(setNextPage())
+
       if (userData) {
         dispatch(getCart(userData.cart))
       }
@@ -118,7 +119,7 @@ const Shop: React.FC = () => {
   }, [category, sortBy, search])
 
   useEffect(() => {
-    dispatch(setFetchLimit(caltPageFetching(countWineItem, limitWineFeching)))
+    dispatch(setFetchLimit(calcPageFetching(countWineItem, limitWineFeching)))
 
     if (fetching && currentPage <= fetchLimit) {
       dispatch(

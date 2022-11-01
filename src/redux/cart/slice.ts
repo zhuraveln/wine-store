@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CartItem, CartSliceState } from '../cart/types'
-import { getCart, uploadCart } from './asyncActions'
+import { getCart, uploadCart, uploadCartItem } from './asyncActions'
 
 export const initialState: CartSliceState = {
   items: [],
@@ -22,25 +22,15 @@ export const cartSlice = createSlice({
           item.bottleSize === bottleSize
       )
 
-      const bottlePrice = bottleType === 'Стеклянная бутылка' ? 250 : 0
-
       if (findItem) {
         findItem.count++
       } else {
-        state.items.push({
-          ...action.payload,
-          price: Math.round(price * bottleSize) + bottlePrice,
-          count: 1
-        })
+        state.items.push(action.payload)
       }
-
-      state.totalPrice = state.items.reduce(
-        (sum, item) => item.price * item.count + sum,
-        0
-      )
+      state.totalPrice += price
     },
     //Remove Item in Cart
-    removeItem(state, action: PayloadAction<CartItem>) {
+    removeOneItem(state, action: PayloadAction<CartItem>) {
       const { id, bottleType, bottleSize } = action.payload
 
       const findItem = state.items.find(
@@ -55,8 +45,8 @@ export const cartSlice = createSlice({
         state.totalPrice -= findItem.price
       }
     },
-    //Remove All select Item in Cart
-    removeAllItems(state, action: PayloadAction<CartItem>) {
+    //Remove All select Item in Cart // TODO bug with removeAll
+    removeAllSelectItems(state, action: PayloadAction<CartItem>) {
       const { id, bottleType, bottleSize, price, count } = action.payload
 
       const findItem = state.items.find(
@@ -80,24 +70,32 @@ export const cartSlice = createSlice({
     // Get Cart
     builder.addCase(getCart.pending, state => {})
     builder.addCase(getCart.fulfilled, (state, action) => {
-      console.log(action.payload)
-
-      state.items = [...state.items, ...action.payload.items]
-      state.totalPrice = state.totalPrice + action.payload.totalPrice
+      state.items = action.payload.items
+      state.totalPrice = action.payload.totalPrice
+      // state.items = [...state.items, ...action.payload.items]
+      // state.totalPrice = state.totalPrice + action.payload.totalPrice
     })
     builder.addCase(getCart.rejected, state => {})
 
     // Upload Cart
     builder.addCase(uploadCart.pending, state => {})
     builder.addCase(uploadCart.fulfilled, (state, action) => {
-      state.items = [...state.items, ...action.payload.items]
-      state.totalPrice = state.totalPrice + action.payload.totalPrice
+      state.items = action.payload.items
+      state.totalPrice = action.payload.totalPrice
     })
     builder.addCase(uploadCart.rejected, state => {})
+
+    // Upload Cart Item
+    builder.addCase(uploadCartItem.pending, state => {})
+    builder.addCase(uploadCartItem.fulfilled, (state, action) => {
+      // state.items.push(action.payload.item)
+      // state.totalPrice += action.payload.item.price
+    })
+    builder.addCase(uploadCartItem.rejected, state => {})
   }
 })
 
-export const { addItem, removeItem, removeAllItems, clearCart } =
+export const { addItem, removeOneItem, removeAllSelectItems, clearCart } =
   cartSlice.actions
 
 export default cartSlice.reducer

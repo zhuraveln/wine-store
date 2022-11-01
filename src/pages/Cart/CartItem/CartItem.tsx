@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux'
 import styles from './CartItem.module.scss'
 import { Link } from 'react-router-dom'
 import { CartItem } from '../../../redux/cart/types'
-import { addItem, removeAllItems, removeItem } from '../../../redux/cart/slice'
+import {
+  addItem,
+  removeAllSelectItems,
+  removeOneItem
+} from '../../../redux/cart/slice'
 
 type CartItemProps = {
   id: string
@@ -28,15 +32,21 @@ const CartItemWine: React.FC<CartItemProps> = ({
 }) => {
   const dispatch = useDispatch()
 
-  const itemPlus = () =>
-    dispatch(addItem({ id, bottleType, bottleSize } as CartItem))
+  const onBtnPlus = () =>
+    dispatch(addItem({ id, bottleType, bottleSize, price } as CartItem))
 
-  const itemMinus = () =>
-    dispatch(removeItem({ id, bottleType, bottleSize } as CartItem))
+  const onBtnMinus = () =>
+    dispatch(removeOneItem({ id, bottleType, bottleSize } as CartItem))
 
-  const removeAll = () =>
+  const onBtnRemove = () =>
     dispatch(
-      removeAllItems({ id, bottleType, bottleSize, price, count } as CartItem)
+      removeAllSelectItems({
+        id,
+        bottleType,
+        bottleSize,
+        price,
+        count
+      } as CartItem)
     )
 
   return (
@@ -56,7 +66,7 @@ const CartItemWine: React.FC<CartItemProps> = ({
       <div className={styles.countPriceRemove}>
         <div className={styles.count}>
           <button
-            onClick={itemMinus}
+            onClick={onBtnMinus}
             className={styles.buttonCount}
             disabled={count === 1}
           >
@@ -76,7 +86,7 @@ const CartItemWine: React.FC<CartItemProps> = ({
 
           <b>{count}</b>
 
-          <button onClick={itemPlus} className={styles.buttonCount}>
+          <button onClick={onBtnPlus} className={styles.buttonCount}>
             <svg
               width='10'
               height='10'
@@ -101,7 +111,7 @@ const CartItemWine: React.FC<CartItemProps> = ({
         </div>
 
         <div className={styles.remove}>
-          <div onClick={removeAll} className={styles.buttonRemove}>
+          <div onClick={onBtnRemove} className={styles.buttonRemove}>
             <svg
               width='10'
               height='10'

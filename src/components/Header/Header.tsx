@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { isAuthSelector } from '../../redux/auth/selectors'
 import { logOut } from '../../redux/auth/slice'
 import { cartSelector } from '../../redux/cart/selectors'
+import { clearCart } from '../../redux/cart/slice'
 import { useAppDispatch } from '../../redux/store'
 
 import SearchBar from '../SearchBar/SearchBar'
@@ -21,6 +22,7 @@ const Header: React.FC = () => {
 
   const onClickLogOut = () => {
     dispatch(logOut())
+    dispatch(clearCart())
   }
 
   return (

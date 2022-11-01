@@ -18,3 +18,8 @@ export type UploadCartParams = {
   items: CartItem[]
   totalPrice: number
 }
+
+export type UploadCartItemParams = {
+  cart: string
+  item: CartItem
+}

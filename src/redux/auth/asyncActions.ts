@@ -8,7 +8,7 @@ export const signUp = createAsyncThunk(
   async (params: SignUpParams) => {
     const { name, password } = params
 
-    const data = await AuthAPI.signUp(name, password)
+    const data = await AuthAPI.fetchSignUp(name, password)
 
     return data
   }
@@ -20,7 +20,7 @@ export const signIn = createAsyncThunk(
   async (params: SignUpParams) => {
     const { name, password } = params
 
-    const data = await AuthAPI.signIn(name, password)
+    const data = await AuthAPI.fetchSignIn(name, password)
 
     return data
   }

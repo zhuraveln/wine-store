@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import CartAPI from '../../API/CartAPI'
-import { CartItem, UploadCartParams } from './types'
+import { CartItem, UploadCartItemParams, UploadCartParams } from './types'
 
 // Get Cart
 export const getCart = createAsyncThunk(
@@ -13,11 +13,25 @@ export const getCart = createAsyncThunk(
 )
 
 // Upload Cart
-// export const uploadCart = createAsyncThunk(
-//   'cart/uploadCartStatus',
-//   async (cart: string, items: CartItem[], totalPrice: number) => {
-//     const data = await CartAPI.fetchUploadCart(cart, items, totalPrice)
+export const uploadCart = createAsyncThunk(
+  'cart/uploadCartStatus',
+  async (params: UploadCartParams) => {
+    const { cart, items, totalPrice } = params
 
-//     return data
-//   }
-// )
+    const data = await CartAPI.fetchUploadCart(cart, items, totalPrice)
+
+    return data
+  }
+)
+
+// Upload Cart Item
+export const uploadCartItem = createAsyncThunk(
+  'cart/uploadCartItemStatus',
+  async (params: UploadCartItemParams) => {
+    const { cart, item } = params
+
+    const data = await CartAPI.fetchUploadCartItem(cart, item)
+
+    return data
+  }
+)

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userDataSelector } from '../../redux/auth/selectors'
-import { uploadCart } from '../../redux/cart/asyncActions'
-import { cartItemSelector } from '../../redux/cart/selectors'
+import { uploadCart, uploadCartItem } from '../../redux/cart/asyncActions'
+import { cartItemSelector, cartSelector } from '../../redux/cart/selectors'
 import { addItem } from '../../redux/cart/slice'
 import { CartItem } from '../../redux/cart/types'
 import { WineItem } from '../../redux/wine/types'
@@ -20,30 +20,31 @@ const WineCard: React.FC<WineItem> = ({
 }) => {
   const dispatch = useDispatch()
 
-  const [selectType, setSelectType] = useState(0)
-  const [selectSize, setSelectSize] = useState(0)
+  const [selectType, setSelectType] = useState(bottleTypes[0])
+  const [selectSize, setSelectSize] = useState(bottleSizes[0])
 
-  const cartItem = useSelector(
-    cartItemSelector(id, bottleTypes[selectType], bottleSizes[selectSize])
-  )
+  const cartItem = useSelector(cartItemSelector(id, selectType, selectSize))
+
+  const bottlePrice = selectType === bottleTypes[0] ? 0 : 250
 
   const userData = useSelector(userDataSelector)
+  const { items, totalPrice } = useSelector(cartSelector)
 
   const onClickAdd = (): void => {
     const item: CartItem = {
       id,
       imageUrl,
       title,
-      bottleType: bottleTypes[selectType],
-      bottleSize: bottleSizes[selectSize],
-      price,
-      count: 0 // TODO
+      bottleType: selectType,
+      bottleSize: selectSize,
+      price: Math.round(price * selectSize) + bottlePrice,
+      count: 1
     }
     dispatch(addItem(item))
 
-    if (userData) {
-      // dispatch(uploadCart(userData.cart, item, totalPrice: price))
-    }
+    // userData
+    //   ? dispatch(uploadCart({ cart: userData.cart, item }))
+    //   : dispatch(addItem(item))
   }
 
   return (
@@ -56,8 +57,8 @@ const WineCard: React.FC<WineItem> = ({
         <ul>
           {bottleTypes.map((type, index) => (
             <li
-              className={selectType === index ? `${styles.active}` : ''}
-              onClick={() => setSelectType(index)}
+              className={selectType === type ? `${styles.active}` : ''}
+              onClick={() => setSelectType(type)}
               key={index}
             >
               {type}
@@ -67,8 +68,8 @@ const WineCard: React.FC<WineItem> = ({
         <ul>
           {bottleSizes.map((size, index) => (
             <li
-              className={selectSize === index ? `${styles.active}` : ''}
-              onClick={() => setSelectSize(index)}
+              className={selectSize === size ? `${styles.active}` : ''}
+              onClick={() => setSelectSize(size)}
               key={index}
             >
               {size} л.
@@ -78,7 +79,7 @@ const WineCard: React.FC<WineItem> = ({
       </div>
       <div className={styles.bottom}>
         <div className={styles.price}>
-          {Math.round(price * bottleSizes[selectSize]) + selectType * 250} ₽
+          {Math.round(price * selectSize) + bottlePrice}₽
         </div>
         <button onClick={onClickAdd} className={styles.buttonAdd}>
           <svg
