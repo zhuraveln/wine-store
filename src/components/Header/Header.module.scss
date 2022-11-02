@@ -8,7 +8,7 @@
   padding: 40px 0;
   margin: 0 auto;
 
-  @media (max-width: 814px) {
+  @media (max-width: 1053px) {
     flex-wrap: wrap;
   }
 
@@ -51,13 +51,13 @@
   }
 
   .searchBar {
-    @media (max-width: 814px) {
+    @media (max-width: 1053px) {
       order: 1;
       margin-top: 30px;
     }
 
-    @media (max-width: 500px) {
-      width: 108%;
+    @media (max-width: 695px) {
+      width: 50%;
     }
   }
 
@@ -67,7 +67,12 @@
     border-radius: 30px;
     background-color: $orange;
     padding: 12px 25px;
+    margin-left: 20px;
     transition: background-color $duration ease-in-out;
+
+    @media (max-width: 720px) {
+      margin-left: 0;
+    }
 
     @media (max-width: 460px) {
       padding: 10px 11px;
@@ -87,18 +92,120 @@
     &:hover {
       background-color: darken($orange, 8%);
     }
+
+    .delimiter {
+      width: 2px;
+      height: 25px;
+      background-color: rgba(255, 255, 255, 0.25);
+      margin-left: 14px;
+      margin-right: 14px;
+
+      @media (max-width: 450px) {
+        margin-left: 7px;
+        margin-right: 7px;
+      }
+    }
   }
 
-  .delimiter {
-    width: 2px;
-    height: 25px;
-    background-color: rgba(255, 255, 255, 0.25);
-    margin-left: 14px;
-    margin-right: 14px;
+  .btnAuth {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    background-color: $orange;
+    padding: 12px 25px;
+    margin-left: 20px;
+    transition: background-color $duration ease-in-out;
 
-    @media (max-width: 450px) {
-      margin-left: 7px;
-      margin-right: 7px;
+    @media (max-width: 720px) {
+      order: 1;
+      margin-top: 30px;
+      margin-left: 0;
+      padding: 11px 13px;
+    }
+
+    @media (max-width: 413px) {
+      padding: 11px 6px;
+    }
+
+    svg {
+      margin-right: 8px;
+      margin-bottom: 1px;
+    }
+
+    span {
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: darken($orange, 8%);
+    }
+
+    .delimiter {
+      width: 2px;
+      height: 25px;
+      background-color: rgba(255, 255, 255, 0.25);
+      margin-left: 14px;
+      margin-right: 14px;
+
+      @media (max-width: 720px) {
+        margin-left: 7px;
+        margin-right: 7px;
+      }
+
+      @media (max-width: 413px) {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .btnLogOut {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    background-color: $orange;
+    padding: 14px 25px;
+    margin-left: 20px;
+    transition: background-color $duration ease-in-out;
+
+    @media (max-width: 720px) {
+      order: 1;
+      margin-top: 30px;
+      margin-left: 0;
+    }
+
+    // @media (max-width: 460px) {
+    //   padding: 10px 11px;
+    // }
+
+    svg {
+      margin-right: 8px;
+      margin-bottom: 1px;
+    }
+
+    span {
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: darken($orange, 8%);
+    }
+
+    .delimiter {
+      width: 2px;
+      height: 25px;
+      background-color: rgba(255, 255, 255, 0.25);
+      margin-left: 14px;
+      margin-right: 14px;
+
+      @media (max-width: 720px) {
+        margin-left: 7px;
+        margin-right: 7px;
+      }
     }
   }
 }

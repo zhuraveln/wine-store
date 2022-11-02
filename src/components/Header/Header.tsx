@@ -42,9 +42,9 @@ const Header: React.FC = () => {
       </div>
 
       {!isAuth ? (
-        <div className={styles.buttonCart}>
+        <div className={styles.btnAuth}>
           <Link to='/auth/sign-in'>
-            <span>Войти</span>
+            <span>Вход</span>
           </Link>
 
           <div className={styles.delimiter}></div>
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
       ) : (
-        <div className={styles.buttonCart}>
+        <div className={styles.btnLogOut}>
           <span onClick={onClickLogOut}>Выйти</span>
         </div>
       )}

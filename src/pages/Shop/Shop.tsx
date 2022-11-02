@@ -27,8 +27,9 @@ import { Status } from '../../redux/wine/types'
 import NotFoundWine from './NotFoundWine/NotFoundWine'
 import { removeAllWine } from '../../redux/wine/slice'
 import { calcPageFetching } from '../../utils/calcPageFetching'
-import { getCart } from '../../redux/cart/asyncActions'
+import { getCart, uploadCart } from '../../redux/cart/asyncActions'
 import { userDataSelector } from '../../redux/auth/selectors'
+import { cartSelector } from '../../redux/cart/selectors'
 
 const Shop: React.FC = () => {
   const navigate = useNavigate()
@@ -36,6 +37,8 @@ const Shop: React.FC = () => {
 
   const isUrlSearch = useRef(false)
   const isMounted = useRef(false)
+
+  const [fetching, setFetching] = useState(false)
 
   const { wine, wineStatus, countWineItem } = useSelector(wineSelector)
   const userData = useSelector(userDataSelector)
@@ -49,7 +52,17 @@ const Shop: React.FC = () => {
     limitWineFeching
   } = useSelector(filterSelector)
 
-  const [fetching, setFetching] = useState(false)
+  const { items, totalPrice } = useSelector(cartSelector)
+
+  useEffect(() => {
+    if (isMounted.current) {
+      if (userData) {
+        dispatch(uploadCart({ cart: userData.cart, items, totalPrice }))
+      }
+    }
+
+    isMounted.current = true
+  }, [totalPrice])
 
   // First mount. If search bar have a URL data - save it in Redux (filterSlice).
   // If client haven't URL data - does nothing.

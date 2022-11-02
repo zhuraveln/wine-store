@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,11 +9,13 @@ import styles from './Cart.module.scss'
 import { cartSelector } from '../../redux/cart/selectors'
 import Modal from '../../components/Modal/Modal'
 import { clearCart } from '../../redux/cart/slice'
-import { uploadCart } from '../../redux/cart/asyncActions'
 import { userDataSelector } from '../../redux/auth/selectors'
+import { uploadCart } from '../../redux/cart/asyncActions'
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch()
+
+  const isMounted = useRef(false)
 
   const [modalVisible, modalSetVisible] = useState(false)
 
@@ -21,9 +23,14 @@ const Cart: React.FC = () => {
   const userData = useSelector(userDataSelector)
 
   useEffect(() => {
-    if (userData) {
-      dispatch(uploadCart({ cart: userData.cart, items, totalPrice }))
+    if (isMounted.current) {
+      if (userData) {
+        //@ts-ignore //TODO
+        dispatch(uploadCart({ cart: userData.cart, items, totalPrice }))
+      }
     }
+
+    isMounted.current = true
   }, [totalPrice])
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)

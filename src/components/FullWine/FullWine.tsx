@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import ShopError from '../../pages/Shop/ShopError/ShopError'
-import { cartItemSelector } from '../../redux/cart/selectors'
+import { userDataSelector } from '../../redux/auth/selectors'
+import { uploadCart } from '../../redux/cart/asyncActions'
+import { cartItemSelector, cartSelector } from '../../redux/cart/selectors'
 import { addItem } from '../../redux/cart/slice'
 import { CartItem } from '../../redux/cart/types'
 
@@ -27,7 +29,21 @@ const FullWine: React.FC = () => {
 
   const bottlePrice = selectType === 'Стеклянная бутылка' ? 250 : 0
 
-  const cartItem = useSelector(cartItemSelector(id, selectType, selectSize)) //TODO
+  const cartItem = useSelector(cartItemSelector(id, selectType, selectSize))
+
+  const isMounted = useRef(false)
+  const { items, totalPrice } = useSelector(cartSelector)
+  const userData = useSelector(userDataSelector)
+
+  useEffect(() => {
+    if (isMounted.current) {
+      if (userData) {
+        dispatch(uploadCart({ cart: userData.cart, items, totalPrice }))
+      }
+    }
+
+    isMounted.current = true
+  }, [totalPrice])
 
   const onClickAdd = (): void => {
     const item: CartItem = {
@@ -36,8 +52,8 @@ const FullWine: React.FC = () => {
       title,
       bottleType: selectType,
       bottleSize: selectSize,
-      price,
-      count: 0
+      price: Math.round(price * selectSize) + bottlePrice,
+      count: 1
     }
 
     dispatch(addItem(item))
