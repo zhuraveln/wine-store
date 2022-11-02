@@ -20,11 +20,11 @@ const SignUp: React.FC = () => {
     formState: { errors },
     reset
   } = useForm<IUserFields>({
-    mode: 'onChange',
-    defaultValues: {
-      name: 'Nikita',
-      password: '12345'
-    }
+    mode: 'onChange'
+    // defaultValues: {
+    //   name: 'Nikita',
+    //   password: '12345'
+    // }
   })
 
   const onSubmit: SubmitHandler<IUserFields> = data => {
@@ -39,13 +39,19 @@ const SignUp: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.root}>
-        <p>Мы рады видеть вас!</p>
+        <h2>Мы рады видеть вас!</h2>
 
         <input
           {...register('name', {
             required: 'Это обязательное поле!',
-            minLength: 3,
-            maxLength: 20
+            minLength: {
+              value: 3,
+              message: 'Минимальное количество символов 3'
+            },
+            maxLength: {
+              value: 20,
+              message: 'Максимальное количество символов 20'
+            }
           })}
           placeholder='Введите логин'
         />
@@ -53,9 +59,15 @@ const SignUp: React.FC = () => {
 
         <input
           {...register('password', {
-            required: 'И это тоже...',
-            minLength: 3,
-            maxLength: 20
+            required: 'Это обязательное поле!',
+            minLength: {
+              value: 3,
+              message: 'Минимальное количество символов 3'
+            },
+            maxLength: {
+              value: 25,
+              message: 'Максимальное количество символов 25'
+            }
           })}
           placeholder='Введите пароль'
           type='password'
