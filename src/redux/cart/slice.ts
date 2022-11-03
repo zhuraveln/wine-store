@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CartItem, CartSliceState } from '../cart/types'
+import { Status } from '../wine/types'
 import { getCart, uploadCart, uploadCartItem } from './asyncActions'
 
 export const initialState: CartSliceState = {
   items: [],
-  totalPrice: 0
+  totalPrice: 0,
+  uploadStatus: Status.SUCCESS
 }
 
 export const cartSlice = createSlice({
@@ -78,12 +80,17 @@ export const cartSlice = createSlice({
     builder.addCase(getCart.rejected, state => {})
 
     // Upload Cart
-    builder.addCase(uploadCart.pending, state => {})
+    builder.addCase(uploadCart.pending, state => {
+      state.uploadStatus = Status.LOADING
+    })
     builder.addCase(uploadCart.fulfilled, (state, action) => {
       state.items = action.payload.items
       state.totalPrice = action.payload.totalPrice
+      state.uploadStatus = Status.SUCCESS
     })
-    builder.addCase(uploadCart.rejected, state => {})
+    builder.addCase(uploadCart.rejected, state => {
+      state.uploadStatus = Status.ERROR
+    })
 
     // Upload Cart Item
     builder.addCase(uploadCartItem.pending, state => {})

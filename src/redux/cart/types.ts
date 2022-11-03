@@ -1,3 +1,5 @@
+import { Status } from '../wine/types'
+
 export type CartItem = {
   id: string
   imageUrl: string
@@ -11,6 +13,7 @@ export type CartItem = {
 export interface CartSliceState {
   items: CartItem[]
   totalPrice: number
+  uploadStatus: Status
 }
 
 export type UploadCartParams = {

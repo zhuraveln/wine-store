@@ -4,7 +4,7 @@ export default class AuthAPI {
   // Sign Up
   static async fetchSignUp(name: string, password: string) {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_AUTH}/auth/sign-up`,
+      `${process.env.REACT_APP_SERVER}/auth/sign-up`,
       {
         name,
         password
@@ -16,7 +16,7 @@ export default class AuthAPI {
   // Sign In
   static async fetchSignIn(name: string, password: string) {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_AUTH}/auth/sign-in`,
+      `${process.env.REACT_APP_SERVER}/auth/sign-in`,
       {
         name,
         password

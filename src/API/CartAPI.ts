@@ -6,7 +6,7 @@ export default class CartAPI {
   static async fetchGetCart(cart: string) {
     const response = await axios.post(
       // TODO args
-      `${process.env.REACT_APP_SERVER_AUTH}/cart/get`,
+      `${process.env.REACT_APP_SERVER}/cart/get`,
       {
         cart
       }
@@ -23,7 +23,7 @@ export default class CartAPI {
   ) {
     const response = await axios.post(
       // TODO args
-      `${process.env.REACT_APP_SERVER_AUTH}/cart/upload`,
+      `${process.env.REACT_APP_SERVER}/cart/upload`,
       {
         cart,
         items,
@@ -37,7 +37,7 @@ export default class CartAPI {
   // Upload Cart Item
   static async fetchUploadCartItem(cart: string, item: CartItem) {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_AUTH}/cart/upload-item`,
+      `${process.env.REACT_APP_SERVER}/cart/upload-item`,
       {
         cart,
         item

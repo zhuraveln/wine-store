@@ -32,7 +32,7 @@ const FullWine: React.FC = () => {
   const cartItem = useSelector(cartItemSelector(id, selectType, selectSize))
 
   const isMounted = useRef(false)
-  const { items, totalPrice } = useSelector(cartSelector)
+  const { items, totalPrice, uploadStatus } = useSelector(cartSelector)
   const userData = useSelector(userDataSelector)
 
   useEffect(() => {
@@ -55,8 +55,9 @@ const FullWine: React.FC = () => {
       price: Math.round(price * selectSize) + bottlePrice,
       count: 1
     }
-
-    dispatch(addItem(item))
+    if (uploadStatus === Status.SUCCESS) {
+      dispatch(addItem(item))
+    }
   }
 
   useEffect(() => {

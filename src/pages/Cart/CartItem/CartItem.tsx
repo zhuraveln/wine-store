@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './CartItem.module.scss'
 import { Link } from 'react-router-dom'
@@ -10,6 +10,8 @@ import {
   removeAllSelectItems,
   removeOneItem
 } from '../../../redux/cart/slice'
+import { cartSelector } from '../../../redux/cart/selectors'
+import { Status } from '../../../redux/wine/types'
 
 type CartItemProps = {
   id: string
@@ -31,23 +33,33 @@ const CartItemWine: React.FC<CartItemProps> = ({
   count
 }) => {
   const dispatch = useDispatch()
+  const { uploadStatus } = useSelector(cartSelector)
 
-  const onBtnPlus = () =>
-    dispatch(addItem({ id, bottleType, bottleSize, price } as CartItem))
+  const onBtnPlus = () => {
+    if (uploadStatus === Status.SUCCESS) {
+      dispatch(addItem({ id, bottleType, bottleSize, price } as CartItem))
+    }
+  }
 
-  const onBtnMinus = () =>
-    dispatch(removeOneItem({ id, bottleType, bottleSize } as CartItem))
+  const onBtnMinus = () => {
+    if (uploadStatus === Status.SUCCESS) {
+      dispatch(removeOneItem({ id, bottleType, bottleSize } as CartItem))
+    }
+  }
 
-  const onBtnRemove = () =>
-    dispatch(
-      removeAllSelectItems({
-        id,
-        bottleType,
-        bottleSize,
-        price,
-        count
-      } as CartItem)
-    )
+  const onBtnRemove = () => {
+    if (uploadStatus === Status.SUCCESS) {
+      dispatch(
+        removeAllSelectItems({
+          id,
+          bottleType,
+          bottleSize,
+          price,
+          count
+        } as CartItem)
+      )
+    }
+  }
 
   return (
     <div className={styles.item}>

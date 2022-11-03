@@ -43,11 +43,11 @@ const SignUp: React.FC = () => {
             required: 'Это обязательное поле!',
             minLength: {
               value: 3,
-              message: 'Минимальное количество символов 3'
+              message: 'минимальное кол-во символов 3'
             },
             maxLength: {
               value: 20,
-              message: 'Максимальное количество символов 20'
+              message: 'максимальное кол-во символов 20'
             }
           })}
           placeholder='Введите логин'
@@ -59,11 +59,11 @@ const SignUp: React.FC = () => {
             required: 'Это обязательное поле!',
             minLength: {
               value: 3,
-              message: 'Минимальное количество символов 3'
+              message: 'минимальное кол-во символов 3'
             },
             maxLength: {
               value: 25,
-              message: 'Максимальное количество символов 25'
+              message: 'максимальное кол-во символов 25'
             }
           })}
           placeholder='Введите пароль'
