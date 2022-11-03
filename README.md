@@ -1,8 +1,8 @@
 # 🍇 Online shop "Wine Store"
 
-powered by 💙 \***\*React JS\*\***
+powered by 💙 ****React JS****
 
-## 🎺 Demo
+## 👀 Demo
 
 - **[wine-store](https://wine-store-client.vercel.app/)** (vercel)
 
