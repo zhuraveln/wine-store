@@ -34,6 +34,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuraveln/wine-store-client.git"
+  },
+  "author": "Zhuravel Nikita",
+  "license": "ISC",
   "browserslist": {
     "production": [
       ">0.2%",

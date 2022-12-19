@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import qs from 'qs'
 import { useNavigate } from 'react-router-dom'
-
 import { useSelector } from 'react-redux'
 
 import styles from './Shop.module.scss'
@@ -26,10 +25,11 @@ import { fetchAllWine, fetchAllWineCalc } from '../../redux/wine/asyncActions'
 import { Status } from '../../redux/wine/types'
 import NotFoundWine from './NotFoundWine/NotFoundWine'
 import { removeAllWine } from '../../redux/wine/slice'
-import { calcPageFetching } from '../../utils/calcPageFetching'
 import { getCart, uploadCart } from '../../redux/cart/asyncActions'
 import { userDataSelector } from '../../redux/auth/selectors'
 import { cartSelector } from '../../redux/cart/selectors'
+
+import { calcPageFetching } from '../../utils/calcPageFetching'
 
 const Shop: React.FC = () => {
   const navigate = useNavigate()

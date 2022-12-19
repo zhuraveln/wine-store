@@ -1,18 +1,15 @@
-# 🍇 Online shop "Wine Store"
+# 🍇 "Wine Store" - Online shop
 
-powered by 💙 ****React JS****
-
-## 👀 Demo
-
-- **[wine-store](https://wine-store-client.vercel.app/)** (vercel)
+SPA by 💙 **React**
 
 ## 🛠 Tech Stack
 
 - Typescript
-- React / React Router / Axios / React Hook Form / React content loader
+- React
+- React Router / Axios / React Hook Form
 - Redux toolkit / Redux persist
-- lodash.debounce / qs
-- SCSS / CSS Modules
+- SCSS / SCSS Modules
+- Other libraries – React content loader, lodash.debounce, qs
 
 ## ⚡️ Features
 
@@ -21,35 +18,15 @@ powered by 💙 ****React JS****
 - Adaptive layout for all devices
 - Lazy loading React components
 
-## 🏗 API Reference
+## 🗃 Backend / data storage
 
-- **Wine API** - [mockAPI](https://6347fc090484786c6e8e9eee.mockapi.io/wine)
-- **Auth/User's cart API** - my [Node.js server](https://github.com/zhuraveln/wine-store-server)
+- **Wine data** - [mockAPI](https://6347fc090484786c6e8e9eee.mockapi.io/wine)
+- **Auth/User's cart** - my [Node.js REST-API server](https://wine-store-server.vercel.app/)
+- **Local storage** - for non-logged in users
 
-## 🚚 Run Locally
+## 👀 Demo
 
-Clone the project
+- **deployed project - [wine-store](https://wine-store-client.vercel.app/)**
 
-```bash
-  git clone https://github.com/zhuraveln/wine-store-client.git
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the local server
-
-```bash
-  npm start
-```
-
-## 🔐 Environment Variables
-
-Add the following environment variables to your .env file
-
-`REACT_APP_MOCK_API` - _my [mockAPI](https://6347fc090484786c6e8e9eee.mockapi.io/wine) (you can set own)_
-
-`REACT_APP_SERVER` - _my [Node.js server](https://wine-store-server.herokuapp.com/)_
+  ![main-page](/src/assets/demo/Demo-1.png)
+  ![mobile-ver-and-cart](/src/assets/demo/Demo-2.png)

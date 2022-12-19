@@ -1,5 +1,11 @@
 import { SortType } from '../filter/types'
 
+export enum Status {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error'
+}
+
 export type WineItem = {
   id: string
   imageUrl: string
@@ -9,12 +15,6 @@ export type WineItem = {
   bottleTypes: string[]
   price: number
   rating: number
-}
-
-export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error'
 }
 
 export interface WineSliceState {
