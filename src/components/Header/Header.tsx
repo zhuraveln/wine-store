@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { isAuthSelector } from '../../redux/auth/selectors'
+import { authSelector } from '../../redux/auth/selectors'
 import { logOut } from '../../redux/auth/slice'
 import { cartSelector } from '../../redux/cart/selectors'
 import { clearCart } from '../../redux/cart/slice'
@@ -15,7 +15,9 @@ const Header: React.FC = () => {
   const { pathname } = useLocation()
   const dispatch = useAppDispatch()
 
-  const isAuth = useSelector(isAuthSelector)
+  const { userData } = useSelector(authSelector)
+  const isAuth = Boolean(userData)
+
   const { items, totalPrice } = useSelector(cartSelector)
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)

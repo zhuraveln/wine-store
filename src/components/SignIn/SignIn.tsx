@@ -4,15 +4,17 @@ import { Navigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { signIn } from '../../redux/auth/asyncActions'
-import { isAuthSelector } from '../../redux/auth/selectors'
+import { authSelector } from '../../redux/auth/selectors'
 import { useAppDispatch } from '../../redux/store'
 
-import styles from './SignIn.module.scss'
 import { IUserFields } from './types'
+import { Status } from '../../redux/wine/types'
+import styles from './SignIn.module.scss'
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch()
-  const isAuth = useSelector(isAuthSelector)
+  const { userData, status } = useSelector(authSelector)
+  const isAuth = Boolean(userData)
 
   const {
     register,
@@ -20,15 +22,15 @@ const SignUp: React.FC = () => {
     formState: { errors },
     reset
   } = useForm<IUserFields>({
-    mode: 'onChange'
-    // defaultValues: {
-    //   name: 'Nikita',
-    //   password: '12345'
-    // }
+    mode: 'onChange',
+    defaultValues: {
+      name: 'Nikita',
+      password: '12345'
+    }
   })
 
-  const onSubmit: SubmitHandler<IUserFields> = data => {
-    dispatch(signIn(data))
+  const onSubmit: SubmitHandler<IUserFields> = async data => {
+    await dispatch(signIn(data))
     reset()
   }
 
@@ -74,7 +76,13 @@ const SignUp: React.FC = () => {
         />
         {errors?.password && <p>{errors.password.message}</p>}
 
-        <button>Войти</button>
+        <button>
+          {status === Status.LOADING ? (
+            <div className={styles.loader}></div>
+          ) : (
+            'Войти'
+          )}
+        </button>
       </form>
     </>
   )

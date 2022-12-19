@@ -5,7 +5,7 @@ import { AuthSliceState } from './types'
 
 const initialState: AuthSliceState = {
   userData: null,
-  status: Status.LOADING
+  status: Status.SUCCESS
 }
 
 export const authSlice = createSlice({
@@ -14,7 +14,7 @@ export const authSlice = createSlice({
   reducers: {
     logOut(state) {
       state.userData = null
-      state.status = Status.LOADING
+      state.status = Status.SUCCESS
     }
   },
   extraReducers: builder => {

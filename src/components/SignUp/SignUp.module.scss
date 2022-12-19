@@ -44,6 +44,8 @@
   }
 
   button {
+    display: flex;
+    justify-content: center;
     padding: 10px;
     border: 1px solid $orange;
     border-radius: 7px;
@@ -56,6 +58,24 @@
     &:hover,
     &:active {
       background-color: darken($orange, 8%);
+    }
+  }
+
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 22.7px;
+    height: 22.7px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }
